@@ -1,0 +1,13 @@
+Package: MethylPipeR
+Type: Package
+Title: MethylPipeR
+Version: 0.1.0
+Imports: BART, pROC, glmnet, doMC, doParallel, tictoc, caret, survival, ggplot2,
+    dplyr, ROCR, RColorBrewer, stats, MLmetrics, randomForest
+Author: Yipeng Cheng
+Maintainer: Yipeng Cheng <y.cheng-50@sms.ed.ac.uk>
+Description: Modular and reproducible machine learning prediction pipelines.
+License: What license is it under?
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.1.1
