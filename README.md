@@ -1,11 +1,17 @@
 # MethylPipeR
 This package provides functions for running machine learning prediction pipelines with a focus on systematic and reproducible experiments.
 
-## Installation
-To install MethylPipeR from the tar.gz file:
+## Installation from GitLab
+As the repository is currently private, you will need to create a GitLab personal access token to pass into the `install_gitlab` function.
+To do this, navigate to 'User Settings' on GitLab (click your avatar in the top right of the web UI) and select 'Access Tokens' on the left hand menu.
+Under 'Personal Access Tokens', enter a name for your new token and make sure to select all the 'read' permissions under 'Scopes'. 
+Click 'Create personal access token' and copy the generated token.
+
+In R, use the following:
 ```r
-install.packages('/path/to/file/MethylPipeR_0.1.0.tar.gz')
+remotes::install_gitlab('marioni-group/methylpiper', auth_token = 'INSERT AUTH TOKEN HERE')
 ```
+
 
 ## Pipeline Basics
 Pipeline instances are defined in an R script with the following function calls:
