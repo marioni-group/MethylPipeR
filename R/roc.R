@@ -68,6 +68,10 @@ multipleROC <- function(labelsList, predictionsList, title, pipeline.run.informa
   legend(legendPosition, legend = legendText, bty = 'n', col = colourPalette[1:length(methodsList)], lty = rep(1, length(methodsList)),
          lwd = rep(5, length(methodsList))
          )
+  if (plotPRBaseline & auc == 'PR') {
+    baselinePrecision <- sum(labelsList[[1]] == 1) / length(labelsList[[1]])
+    abline(h = baselinePrecision)
+  }
   rocPlot <- recordPlot()
 
   toc(log = TRUE)

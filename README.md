@@ -40,7 +40,7 @@ The information and outputs saved are:
 NOTE: The pipeline run information and running times files are only written once `endPipelineRun` has been called, therefore if errors occur during the pipeline run, these will not be written.
 
 
-## Example incremental EpiScore Pipeline Run
+## Example incremental EpiScore pipeline run
 
 ```r
 library(MethylPipeR)
