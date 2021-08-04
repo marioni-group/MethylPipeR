@@ -1,7 +1,6 @@
-#' @importFrom BART mc.surv.bart
+#' @importFrom BART mc.surv.bart mc.gbart gbart
 #' @importFrom pROC roc auc
-#' @importFrom glmnet cv.glmnet
-#' @importFrom doMC registerDoMC
+#' @importFrom glmnet cv.glmnet glmnet
 #' @importFrom doParallel registerDoParallel
 #' @importFrom tictoc tic toc tic.log
 #' @importFrom caret confusionMatrix
@@ -17,4 +16,6 @@
 #' @importFrom ROCR prediction performance
 #' @importFrom MLmetrics PRAUC
 #' @importFrom randomForest randomForest
+#' @importFrom randomForestSRC rfsrc
+#' @importFrom graphics abline
 NULL
