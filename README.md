@@ -111,7 +111,8 @@ covariatesTableTest <- loadData('/path/to/data/covariates_table_test.csv')
 covariatesTableTest$methyl <- predictLogisticModel(logisticModel,
                                                    xs = cpgMatrixTest,
                                                    pipelineRunInformation = runInformation,
-                                                   modelLabel = 'lasso_episcore')
+                                                   modelLabel = 'lasso_episcore',
+                                                   predictType = 'link')
                                                    
 nonZeroCoefficients <- getNonZeroCoefficients(model = logisticModel,
                                               pipelineRunInformation = runInformation,
