@@ -6,3 +6,9 @@ checkNA <- function(x, stop = TRUE) {
     containsNAs
   }
 }
+
+checkMatrixOrDF <- function(x) {
+  if (!(is.matrix(x) | is.data.frame(x))) {
+    stop('Input should be a matrix or data.frame!')
+  }
+}
