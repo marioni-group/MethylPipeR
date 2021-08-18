@@ -16,7 +16,7 @@
 #' @return
 #' @export
 fitMPRModel <- function(type, # 'binary', 'survival', or 'continuous'
-                        method, # 'glmnet', 'bart', or 'continuous'
+                        method, # 'glmnet', 'bart', or 'rf'
                         trainXs, 
                         trainY, 
                         testXs = NULL, 
@@ -27,11 +27,13 @@ fitMPRModel <- function(type, # 'binary', 'survival', or 'continuous'
                         seed = NULL,
                         ...) {
   
-  # Check for NAs. The rest of the function assumes complete data
+  # Check input type and presence of missing values. The rest of the function assumes complete data
   checkNA(trainXs)
   checkNA(trainY)
+  checkMatrixOrDF(trainXs)
   if (!is.null(testXs)) {
     checkNA(testXs)
+    checkMatrixOrDF(testXs)
   }
   if (!is.null(testY)) {
     checkNA(testY)
@@ -100,10 +102,113 @@ fitMPRModel <- function(type, # 'binary', 'survival', or 'continuous'
   
   
   model <- fitFunctionLookup[[type]][[method]]()
-  return(structure(list(model = model), class = 'MPRModel'))
+  structure(list(model = model, modelType = type, modelMethod = method), class = 'MPRModel')
 }
 
-fitMPRModelCV <- function() {
+#' Title
+#'
+#' @param type 
+#' @param method 
+#' @param trainXs 
+#' @param trainY 
+#' @param testXs 
+#' @param testY 
+#' @param tteColname 
+#' @param eventColname 
+#' @param parallel 
+#' @param seed 
+#' @param nFolds 
+#' @param foldID 
+#'
+#' @return
+#' @export
+#'
+#' @examples
+fitMPRModelCV <- function(type, # 'binary', 'survival', or 'continuous'
+                          method, # 'glmnet', 'bart', or 'rf'
+                          trainXs, 
+                          trainY, 
+                          testXs = NULL, 
+                          testY = NULL,
+                          tteColname = 'time_to_event',
+                          eventColname = 'Event',
+                          parallel = FALSE,
+                          seed = NULL,
+                          nFolds = 10,
+                          foldID = NULL,
+                          ...) {
+  # Check input type and presence of missing values. The rest of the function assumes complete data
+  checkNA(trainXs)
+  checkNA(trainY)
+  checkMatrixOrDF(trainXs)
+  if (!is.null(testXs)) {
+    checkNA(testXs)
+    checkMatrixOrDF(testXs)
+  }
+  if (!is.null(testY)) {
+    checkNA(testY)
+  }
+  
+  # If using a survival model, check that the specified column names exist
+  if (type == 'survival') {
+    if (!(tteColname %in% colnames(trainY))) {
+      stop(paste0('Specified tteColname ', tteColname, ' not present in trainY'))
+    }
+    if (!(eventColname %in% colnames(trainY))) {
+      stop(paste0('Specified eventColname ', eventColname, ' not present in trainY'))
+    }
+    if (!is.null(testY)) {
+      if (!(tteColname %in% colnames(testY))) {
+        stop(paste0('Specified tteColname ', tteColname, ' not present in testY'))
+      }
+      if (!(eventColname %in% colnames(testY))) {
+        stop(paste0('Specified eventColname ', eventColname, ' not present in testY'))
+      }
+    }
+  }
+  
   
 }
 
+#' Title
+#'
+#' @param X 
+#' @param yColname 
+#' @param covColnames 
+#' @param scoreColname 
+#' @param family 
+#'
+#' @return
+#' @export
+#'
+#' @examples
+fitMPRModelIncremental <- function(X, yColname, covColnames, scoreColname, family = 'binomial') {
+  nullFormulaString <- paste(yColname, paste(covColnames, collapse = ' + '), sep = ' ~ ')
+  nullModel <- glm(as.formula(nullFormulaString), family = family, data = X)
+  
+  fullFormulaString <- paste(nullFormulaString, scoreColname, sep = ' + ')
+  fullModel <- glm(as.formula(fullFormulaString), family = family, data = X)
+  
+  nullModelResponse <- predict(nullModel, type = 'response')
+  fullModelResponse <- predict(fullModel, type = 'response')
+  
+  
+  # nullAUC <- pROC::roc(X[, yColname], nullModelResponse)$auc
+  # fullAUC <- pROC::roc(X[, yColname], fullModelResponse)$auc
+  # nullPRAUC <- MLmetrics::PRAUC(nullModelResponse, X[, yColname])
+  # fullPRAUC <- MLmetrics::PRAUC(fullModelResponse, X[, yColname])
+  
+  list(null = list(formula = nullFormulaString,
+                   model = nullModel,
+                   response = nullModelResponse
+                   # auc = nullAUC,
+                   # prauc = nullPRAUC
+                   ),
+       full = list(formula = fullFormulaString,
+                   model = fullModel,
+                   response = fullModelResponse
+                   # auc = fullAUC,
+                   # prauc = fullPRAUC
+                   )
+  )
+}
