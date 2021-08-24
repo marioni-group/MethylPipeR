@@ -134,7 +134,7 @@ fitMPRModelCV <- function(type, # 'binary', 'survival', or 'continuous'
                           eventColname = 'Event',
                           parallel = FALSE,
                           seed = NULL,
-                          nFolds = 10,
+                          nFolds = 3,
                           foldID = NULL,
                           ...) {
   # Check input type and presence of missing values. The rest of the function assumes complete data
@@ -166,8 +166,50 @@ fitMPRModelCV <- function(type, # 'binary', 'survival', or 'continuous'
       }
     }
   }
-  
-  
+  fitFunctionLookup <- list(
+    'binary' = list(
+      'glmnet' = function() {
+        cv.glmnet(x = trainXs, y = trainY, family = 'binomial', nfolds = nFolds, foldid = foldID, ...)
+      },
+      'bart' = function() {
+        if (is.null(testXs)) {
+          testXs <- trainXs
+        }
+        if (parallel) {
+          mc.gbart(x.train = trainXs, y.train = trainY, x.test = testXs, type = 'pbart', seed = seed, ...)
+        } else {
+          gbart(x.train = trainXs, y.train = trainY, x.test = testXs, type = 'pbart', seed = seed, ...)
+        }
+      },
+      'rf' = function() {
+        if (is.null(testXs)) {
+          testXs <- trainXs
+        }
+        if (is.null(testY)) {
+          testY <- trainY
+        }
+        randomForest(x = trainXs, y = as.factor(trainY), xtest = testXs, ytest = as.factor(testY), ...)
+      }
+    ),
+    'survival' = list(
+      'glmnet' = function() {
+        cv.glmnet(x = trainXs, y = Surv(trainY[, tteColname], trainY[, eventColname]), family = 'cox', nfolds = nFolds, foldid = foldID, ...)
+      },
+      'bart' = function() {
+        mc.surv.bart(x.train = trainXs, y.train = trainY)
+      },
+      'rf' = rfsrc # TODO: replace with custom function
+    ),
+    'continuous' = list(
+      'glmnet' = function() {
+        cv.glmnet(x = trainXs, y = trainY, family = 'gaussian', nfolds = nFolds, foldid = foldID, ...)
+      },
+      'bart' = mc.gbart,
+      'rf' = randomForest # TODO: replace with custom function
+    )
+  )
+  model <- fitFunctionLookup[[type]][[method]]()
+  structure(list(model = model, modelType = type, modelMethod = method), class = 'MPRModel')
 }
 
 #' Title
