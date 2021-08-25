@@ -24,6 +24,10 @@ continuousglmnetModel <- fitMPRModel(type = 'continuous', method = 'glmnet', tra
 expect_s3_class(continuousglmnetModel, 'MPRModel')
 expect_s3_class(continuousglmnetModel$model, 'glmnet')
 
+continuousbartModel <- fitMPRModel(type = 'continuous', method = 'bart', trainXs = dummyTrainXs, trainY = rnorm(100))
+expect_s3_class(continuousbartModel, 'MPRModel')
+expect_s3_class(continuousbartModel$model, 'wbart')
+
 # Test survival models
 dummySurvTrainY <- data.frame(list('time_to_event' = runif(100, 0, 10),
                                    'Event' = dummyTrainY))
@@ -33,8 +37,14 @@ dummySurvTestY <- data.frame(list('time_to_event' = runif(100, 0, 10),
 survivalglmnetModel <- fitMPRModel(type = 'survival', method = 'glmnet', 
                                    trainXs = dummyTrainXs, trainY = dummySurvTrainY, 
                                    tteColname = 'time_to_event', eventColname = 'Event')
+survivalrfModel <- fitMPRModel(type = 'survival', method = 'rf',
+                               trainXs = dummyTrainXs, trainY = dummySurvTrainY,
+                               tteColname = 'time_to_event', eventColname = 'Event')
+
 expect_s3_class(survivalglmnetModel, 'MPRModel')
 expect_s3_class(survivalglmnetModel$model, 'glmnet')
+
+expect_s3_class(survivalrfModel, 'MPRModel')
 
 # Test survival columns not matching those specified
 expect_error(do.call(fitMPRModel, type = 'survival', method = 'glmnet', 
