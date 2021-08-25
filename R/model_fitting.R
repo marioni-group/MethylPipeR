@@ -89,13 +89,25 @@ fitMPRModel <- function(type, # 'binary', 'survival', or 'continuous'
       'bart' = function() {
         mc.surv.bart(x.train = trainXs, y.train = trainY)
       },
-      'rf' = rfsrc # TODO: replace with custom function
+      'rf' = function() {
+        trainDF <- cbind(trainXs, trainY)
+        rfsrc(as.formula(paste0('Surv(', tteColname, ', ', eventColname, ') ~ .')), trainDF, seed = seed)
+      }
     ),
     'continuous' = list(
       'glmnet' = function() {
         glmnet(x = trainXs, y = trainY, family = 'gaussian', ...)
       },
-      'bart' = mc.gbart,
+      'bart' = function() {
+        if (is.null(testXs)) {
+          testXs <- trainXs
+        }
+        if (parallel) {
+          mc.gbart(x.train = trainXs, y.train = trainY, x.test = testXs, type = 'wbart', seed = seed, ...)
+        } else {
+          gbart(x.train = trainXs, y.train = trainY, x.test = testXs, type = 'wbart', seed = seed, ...)
+        }
+      },
       'rf' = randomForest # TODO: replace with custom function
     )
   )
@@ -198,13 +210,19 @@ fitMPRModelCV <- function(type, # 'binary', 'survival', or 'continuous'
       'bart' = function() {
         mc.surv.bart(x.train = trainXs, y.train = trainY)
       },
-      'rf' = rfsrc # TODO: replace with custom function
+      'rf' = function() {
+        # TODO: replace with CV version
+        trainDF <- cbind(trainXs, trainY)
+        rfsrc(as.formula(paste0('Surv(', tteColname, ', ', eventColname, ') ~ .')), trainDF, seed = seed)
+      }
     ),
     'continuous' = list(
       'glmnet' = function() {
         cv.glmnet(x = trainXs, y = trainY, family = 'gaussian', nfolds = nFolds, foldid = foldID, ...)
       },
-      'bart' = mc.gbart,
+      'bart' = function() {
+        # TODO: Complete
+      },
       'rf' = randomForest # TODO: replace with custom function
     )
   )
