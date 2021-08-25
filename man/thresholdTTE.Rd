@@ -4,14 +4,24 @@
 \alias{thresholdTTE}
 \title{thresholdTTE}
 \usage{
-thresholdTTE(targetToFilter, objectsToFilter, threshold)
+thresholdTTE(
+  targetToFilter,
+  objectsToFilter,
+  threshold,
+  eventColname = "Event",
+  tteColname = "time_to_event"
+)
 }
 \arguments{
-\item{targetToFilter}{A matrix or data.frame including a numerical column named 'time_to_event' and a binary 1/0 column named 'Event'}
+\item{targetToFilter}{A matrix or data.frame including a numerical column named 'time_to_event' and a binary 1/0 column named 'Event'. eventColname and/or tteColname must be specified if either or both of these columns do not have the default names.}
 
 \item{objectsToFilter}{A list of matrix/data.frame objects each with the same number of rows as targetToFilter. These will have the same rows (according to index) removed as targetToFilter}
 
 \item{threshold}{The time-to-event threshold which will be used.}
+
+\item{eventColname}{The name for the event column. Must be specified if not 'Event'.}
+
+\item{tteColname}{The name for the time-to-event column. Must be specified if not 'time_to_event'}
 }
 \value{
 A list with elements targetFiltered and objectsFiltered corresponding to targetToFilter and objectsToFilter after thresholding. Thresholding involves the following: Rows with Event == 1 (cases) and time_to_event > threshold will be converted to Event == 0 (controls). Rows with Event == 0 and time_to_event <= threshold will be removed.
