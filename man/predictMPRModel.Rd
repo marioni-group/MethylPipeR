@@ -4,7 +4,7 @@
 \alias{predictMPRModel}
 \title{Title}
 \usage{
-predictMPRModel(model, data, ...)
+predictMPRModel(model, data, bartMeanOrMedian = "mean", ...)
 }
 \arguments{
 \item{model}{}

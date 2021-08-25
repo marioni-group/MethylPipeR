@@ -6,7 +6,7 @@
 #'
 #' @return
 #' @export
-predictMPRModel <- function(model, data, ...) {
+predictMPRModel <- function(model, data, bartMeanOrMedian = 'mean', ...) {
   checkNA(data)
   checkMatrixOrDF(data)
   if (S3Class(model) != 'MPRModel') {
@@ -43,7 +43,12 @@ predictMPRModel <- function(model, data, ...) {
         as.numeric(predict(model$model, data, ...))
       },
       'bart' = function() {
-        # TODO: implement
+        bartPredictResult <- predict(model$model, newdata = data, ...)
+        if (bartMeanOrMedian == 'mean') {
+          apply(bartPredictResult, 2, mean)
+        } else if (bartMeanOrMedian == 'median') {
+          apply(bartPredictResult, 2, 'median')
+        }
       },
       'rf' = function() {
         # TODO: implement
