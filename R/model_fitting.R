@@ -73,13 +73,13 @@ fitMPRModel <- function(type, # 'binary', 'survival', or 'continuous'
         }
       },
       'rf' = function() {
-        if (is.null(testXs)) {
-          testXs <- trainXs
-        }
-        if (is.null(testY)) {
-          testY <- trainY
-        }
-        randomForest(x = trainXs, y = as.factor(trainY), xtest = testXs, ytest = as.factor(testY), ...)
+        # if (is.null(testXs)) {
+        #   testXs <- trainXs
+        # }
+        # if (is.null(testY)) {
+        #   testY <- trainY
+        # }
+        randomForest(x = trainXs, y = as.factor(trainY), ...)
       }
     ),
     'survival' = list(
@@ -108,7 +108,14 @@ fitMPRModel <- function(type, # 'binary', 'survival', or 'continuous'
           gbart(x.train = trainXs, y.train = trainY, x.test = testXs, type = 'wbart', seed = seed, ...)
         }
       },
-      'rf' = randomForest # TODO: replace with custom function
+      'rf' = function() {
+        # if (is.null(testXs)) {
+        #   testXs <- trainXs
+        #   testY <- trainY
+        # }
+        set.seed(seed)
+        randomForest(x = trainXs, y = trainY, ...)
+      }
     )
   )
   
