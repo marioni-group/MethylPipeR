@@ -28,6 +28,10 @@ continuousbartModel <- fitMPRModel(type = 'continuous', method = 'bart', trainXs
 expect_s3_class(continuousbartModel, 'MPRModel')
 expect_s3_class(continuousbartModel$model, 'wbart')
 
+continuousrfModel <- fitMPRModel(type = 'continuous', method = 'rf', trainXs = dummyTrainXs, trainY = rnorm(100))
+expect_s3_class(continuousrfModel, 'MPRModel')
+expect_s3_class(continuousrfModel$model, 'randomForest')
+
 # Test survival models
 dummySurvTrainY <- data.frame(list('time_to_event' = runif(100, 0, 10),
                                    'Event' = dummyTrainY))

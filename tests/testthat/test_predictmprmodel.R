@@ -14,3 +14,8 @@ continuousbartModel <- fitMPRModel(type = 'continuous', method = 'bart', trainXs
 continuousbarttestPredictions <- predictMPRModel(continuousbartModel, dummyTestXs)
 
 expect_equal(length(continuousbarttestPredictions), nrow(dummyTestXs))
+
+continuousrfModel <- fitMPRModel(type = 'continuous', method = 'rf', trainXs = dummyTrainXs, trainY = rnorm(100))
+continuousrftestPredictions <- predictMPRModel(continuousrfModel, dummyTestXs)
+
+expect_equal(length(continuousrftestPredictions), nrow(dummyTestXs))
