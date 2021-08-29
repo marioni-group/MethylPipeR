@@ -52,6 +52,7 @@ predictMPRModel <- function(model, data, bartMeanOrMedian = 'mean', ...) {
       },
       'rf' = function() {
         rfPredictResult <- predict(model$model, newdata = data, ...)
+        rfPredictResult
       }
     )
   )
