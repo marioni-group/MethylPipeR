@@ -28,15 +28,28 @@ fitMPRModel <- function(type, # 'binary', 'survival', or 'continuous'
                         ...) {
   
   # Check input type and presence of missing values. The rest of the function assumes complete data
+  # If trainY and testY are tables i.e. when type == 'survival', only the columns specified by tteColname and eventColname are checked for NAs 
   checkNA(trainXs)
-  checkNA(trainY)
+  if (type == 'survival') {
+    checkNA(trainY[, tteColname])
+    checkNA(trainY[, eventColname])
+  } else {
+    checkNA(trainY)
+  }
+  
   checkMatrixOrDF(trainXs)
   if (!is.null(testXs)) {
     checkNA(testXs)
     checkMatrixOrDF(testXs)
   }
   if (!is.null(testY)) {
-    checkNA(testY)
+    if (type == 'survival') {
+      checkNA(testY[, tteColname])
+      checkNA(testY[, eventColname])
+    } else {
+      checkNA(testY)
+    }
+    
   }
   
   # If using a survival model, check that the specified column names exist
@@ -87,11 +100,11 @@ fitMPRModel <- function(type, # 'binary', 'survival', or 'continuous'
         glmnet(x = trainXs, y = Surv(trainY[, tteColname], trainY[, eventColname]), family = 'cox', ...)
       },
       'bart' = function() {
-        mc.surv.bart(x.train = trainXs, y.train = trainY)
+        mc.surv.bart(x.train = trainXs, y.train = trainY, ...)
       },
       'rf' = function() {
         trainDF <- cbind(trainXs, trainY)
-        rfsrc(as.formula(paste0('Surv(', tteColname, ', ', eventColname, ') ~ .')), trainDF, seed = seed)
+        rfsrc(as.formula(paste0('Surv(', tteColname, ', ', eventColname, ') ~ .')), trainDF, seed = seed, ...)
       }
     ),
     'continuous' = list(
