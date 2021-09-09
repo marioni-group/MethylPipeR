@@ -214,13 +214,8 @@ fitMPRModelCV <- function(type, # 'binary', 'survival', or 'continuous'
         }
       },
       'rf' = function() {
-        if (is.null(testXs)) {
-          testXs <- trainXs
-        }
-        if (is.null(testY)) {
-          testY <- trainY
-        }
-        randomForest(x = trainXs, y = as.factor(trainY), xtest = testXs, ytest = as.factor(testY), ...)
+        rfCVResult <- rfCVGridSearch(xs = trainXs, y = as.factor(trainY), nFolds = nFolds, foldID = foldID, metric = 'AUC', seed = seed, ...)
+        rfCVResult
       }
     ),
     'survival' = list(
@@ -243,7 +238,10 @@ fitMPRModelCV <- function(type, # 'binary', 'survival', or 'continuous'
       'bart' = function() {
         # TODO: Complete
       },
-      'rf' = randomForest # TODO: replace with custom function
+      'rf' = function() {
+        rfCVResult <- rfCVGridSearch(xs = trainXs, y = trainY, nFolds = nFolds, foldID = foldID, metric = 'RMSE', seed = seed, ...)
+        rfCVResult
+      }
     )
   )
   model <- fitFunctionLookup[[type]][[method]]()
