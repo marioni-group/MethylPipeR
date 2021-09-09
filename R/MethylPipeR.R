@@ -18,4 +18,7 @@
 #' @importFrom randomForest randomForest
 #' @importFrom randomForestSRC rfsrc
 #' @importFrom graphics abline
+#' @importFrom performance performance_roc
+#' @import e1071
+#' @import see
 NULL
