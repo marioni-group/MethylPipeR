@@ -86,18 +86,3 @@ expect_error(do.call(fitMPRModel, type = 'binary', method = 'glmnet',
                      trainXs = dummyTrainXs, trainY = dummyTrainY, 
                      testXs = dummyTestXs, testY = dummyTestY, alpha = 0.5))
 
-# Test incremental models
-dummyTrainXs <- matrix(rnorm(1000), ncol = 10)
-dummyTrainY <- rbinom(100, 1, 0.2)
-
-dummyTestXs <- matrix(rnorm(1000), ncol = 10)
-dummyTestY <- rbinom(100, 1, 0.2)
-
-dummyCovariatesTable <- data.frame(matrix(rnorm(300), ncol = 3))
-
-continuousglmnetModel <- fitMPRModel(type = 'continuous', method = 'glmnet', trainXs = dummyTrainXs, trainY = rnorm(100), alpha = 0.5)
-score <- predictMPRModel(continuousglmnetModel, dummyTestXs, s = continuousglmnetModel$model$lambda[[1]])
-covColnames <- colnames(dummyCovariatesTable)
-dummyCovariatesTable$score <- score
-dummyCovariatesTable$y <- rnorm(100)
-continuousIncrementalModel <- fitMPRModelIncremental(dummyCovariatesTable, yColname = 'y', covColnames = covColnames, scoreColname = 'score', family = 'gaussian')
