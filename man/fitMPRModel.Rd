@@ -15,6 +15,7 @@ fitMPRModel(
   eventColname = "Event",
   parallel = FALSE,
   seed = NULL,
+  save = TRUE,
   ...
 )
 }
