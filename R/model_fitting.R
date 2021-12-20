@@ -25,6 +25,7 @@ fitMPRModel <- function(type, # 'binary', 'survival', or 'continuous'
                         eventColname = 'Event',
                         parallel = FALSE,
                         seed = NULL,
+                        save = TRUE,
                         ...) {
   
   # Check input type and presence of missing values. The rest of the function assumes complete data
@@ -134,7 +135,9 @@ fitMPRModel <- function(type, # 'binary', 'survival', or 'continuous'
   
   
   model <- fitFunctionLookup[[type]][[method]]()
-  structure(list(model = model, modelType = type, modelMethod = method), class = 'MPRModel')
+  modelObject <- structure(list(model = model, modelType = type, modelMethod = method), class = 'MPRModel')
+  saveMPRModelObject(modelObject)
+  modelObject
 }
 
 #' Title
