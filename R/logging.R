@@ -38,11 +38,11 @@ logSessionLines <- function(...) {
 }
 
 saveMPRModelObject <- function(model) {
-  sessionStartTimeStamp <- getOption('mprSessionStartTimestamp')
+  sessionStartTimestamp <- getOption('mprSessionStartTimestamp')
   sessionLogFolder <- getOption('mprSessionLogFolder')
   folderPath <- paste0(sessionLogFolder, 'models_', sessionStartTimestamp, '/')
   dir.create(paste0(folderPath))
   filePath <- paste0(folderPath, model$modelType, '_', model$modelMethod, '_', format(Sys.time(), '%Y_%m_%d_%H_%M_%S'), '.rds')
   saveRDS(model, file = filePath)
-  logLines(paste0('Saved model in ', filePath))
+  logSessionLines(paste0('Saved model in ', filePath))
 }
