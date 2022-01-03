@@ -2,7 +2,7 @@
 % Please edit documentation in R/model_fitting.R
 \name{fitMPRModel}
 \alias{fitMPRModel}
-\title{Title}
+\title{fitMPRModel}
 \usage{
 fitMPRModel(
   type,
@@ -20,27 +20,33 @@ fitMPRModel(
 )
 }
 \arguments{
-\item{type}{}
+\item{type}{A string representing the type of model. Can be 'binary', 'survival' or 'continuous'.}
 
-\item{method}{}
+\item{method}{The modelling method. Currently supports 'glmnet', 'bart' and 'rf'.}
 
-\item{trainXs}{}
+\item{trainXs}{The training data matrix/data.frame.}
 
-\item{trainY}{}
+\item{trainY}{The training response variable. This should be a vector if type = 'binary'/'continuous' or a data.frame/matrix with column names corresponding to tteColname and eventColname if type = 'survival'.}
 
-\item{testXs}{}
+\item{testXs}{The test data matrix/data.frame.}
 
-\item{testY}{}
+\item{testY}{The test response variable. This should be a vector if type = 'binary'/'continuous' or a data.frame/matrix with column names corresponding to tteColname and eventColname if type = 'survival'.}
 
-\item{parallel}{}
+\item{tteColname}{A string corresponding to the time-to-event column name in trainY/testY. Only required if type == 'survival'.}
 
-\item{seed}{}
+\item{eventColname}{A string corresponding to the event column name in trainY/testY. Only required if type == 'survival'.}
 
-\item{...}{}
+\item{parallel}{A boolean specifying whether parallel computation should be used in model fitting.}
+
+\item{seed}{An integer to set the random seed to for model fitting.}
+
+\item{save}{A boolean specifying if the model object should be saved to the logs.}
+
+\item{...}{Other arguments to be passed to the method-specific fitting function.}
 }
 \value{
-
+A MPRModel object with the fitted model.
 }
 \description{
-Title
+fitMPRModel
 }
