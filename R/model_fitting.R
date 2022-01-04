@@ -100,18 +100,19 @@ fitMPRModel <- function(type, # 'binary', 'survival', or 'continuous'
 
 #' Title
 #'
-#' @param type 
-#' @param method 
-#' @param trainXs 
-#' @param trainY 
-#' @param testXs 
-#' @param testY 
-#' @param tteColname 
-#' @param eventColname 
-#' @param parallel 
-#' @param seed 
-#' @param nFolds 
-#' @param foldID 
+#' @param type A string representing the type of model. Can be 'binary', 'survival' or 'continuous'.
+#' @param method The modelling method. Currently supports 'glmnet', 'bart' and 'rf'.
+#' @param trainXs The training data matrix/data.frame.
+#' @param trainY The training response variable. This should be a vector if type = 'binary'/'continuous' or a data.frame/matrix with column names corresponding to tteColname and eventColname if type = 'survival'.
+#' @param testXs The test data matrix/data.frame.
+#' @param testY The test response variable. This should be a vector if type = 'binary'/'continuous' or a data.frame/matrix with column names corresponding to tteColname and eventColname if type = 'survival'.
+#' @param tteColname A string corresponding to the time-to-event column name in trainY/testY. Only required if type == 'survival'.
+#' @param eventColname A string corresponding to the event column name in trainY/testY. Only required if type == 'survival'.
+#' @param parallel A boolean specifying whether parallel computation should be used in model fitting.
+#' @param seed An integer to set the random seed to for model fitting.
+#' @param nFolds The number of cross-validation folds to use.
+#' @param foldID A vector of integers with length equal to the number of rows in trainXs. Each element represents the fold number assigned to the corresponding row.
+#' @param ... The remaining parameters to be passed to the cross-validation function.
 #'
 #' @return
 #' @export
