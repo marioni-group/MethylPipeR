@@ -25,6 +25,14 @@ initSessionLogFile <- function() {
   close(sessionLogFile)
 }
 
+
+#' Writes lines to the session log.
+#'
+#' @param ... The strings to be written to the session log. One string per line.
+#'
+#' @return
+#' @export
+#'
 logSessionLines <- function(...) {
   sessionLogFilepath <- getOption('mprSessionLogFilepath')
   lineList <- list(...)
@@ -37,6 +45,13 @@ logSessionLines <- function(...) {
   do.call(cat, lineList)
 }
 
+
+#' Saves a MPRModel object to the logging folder.
+#'
+#' @param model The MPRModel object to be saved.
+#'
+#' @return
+#' @export
 saveMPRModelObject <- function(model) {
   sessionStartTimestamp <- getOption('mprSessionStartTimestamp')
   sessionLogFolder <- getOption('mprSessionLogFolder')
