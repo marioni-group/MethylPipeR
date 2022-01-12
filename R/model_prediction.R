@@ -1,10 +1,10 @@
-#' Title
+#' predictMPRModel
 #'
-#' @param model 
-#' @param data 
-#' @param ... 
+#' @param model An MPRModel object. This is typically returned from a call to fitMPRModel.
+#' @param data The data.frame/matrix that the model will be applied to.
+#' @param ... Other arguments to be passed to the method-specific prediction function.
 #'
-#' @return
+#' @return The result from the method-specific predict function.
 #' @export
 predictMPRModel <- function(model, data, bartMeanOrMedian = 'mean', ...) {
   checkNA(data)
