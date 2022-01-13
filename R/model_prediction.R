@@ -6,7 +6,7 @@
 #'
 #' @return The result from the method-specific predict function.
 #' @export
-predictMPRModel <- function(model, data, bartMeanOrMedian = 'mean', ...) {
+predictMPRModel <- function(model, data,  ...) {
   checkNA(data)
   checkMatrixOrDF(data)
   if (S3Class(model) != 'MPRModel') {
@@ -15,54 +15,70 @@ predictMPRModel <- function(model, data, bartMeanOrMedian = 'mean', ...) {
   type <- model$modelType
   method <- model$modelMethod
   
+  # predictFunctionLookup <- list(
+  #   'binary' = list(
+  #     'glmnet' = function() {
+  #       as.numeric(predict(model$model, data, ...))
+  #     },
+  #     'bart' = function() {
+  #       bartPredictResult <- predict(model$model, newdata = data, ...)
+  #       if (bartMeanOrMedian == 'mean') {
+  #         apply(bartPredictResult$prob.test, 2, mean)
+  #       } else if (bartMeanOrMedian == 'median') {
+  #         apply(bartPredictResult$prob.test, 2, median)
+  #       }
+  #     },
+  #     'rf' = function() {
+  #       rfPredictResult <- predict(model$model, newdata = data, ...)
+  #       rfPredictResult
+  #     }
+  #   ),
+  #   'survival' = list(
+  #     'glmnet' = function() {
+  #       as.numeric(predict(model$model, data, ...))
+  #     },
+  #     'bart' = function() {
+  #       # TODO: implement
+  #     },
+  #     'rf' = function() {
+  #       # TODO: implement
+  #     }
+  #   ),
+  #   'continuous' = list(
+  #     'glmnet' = function() {
+  #       as.numeric(predict(model$model, data, ...))
+  #     },
+  #     'bart' = function() {
+  #       bartPredictResult <- predict(model$model, newdata = data, ...)
+  #       if (bartMeanOrMedian == 'mean') {
+  #         apply(bartPredictResult, 2, mean)
+  #       } else if (bartMeanOrMedian == 'median') {
+  #         apply(bartPredictResult, 2, median)
+  #       }
+  #     },
+  #     'rf' = function() {
+  #       rfPredictResult <- predict(model$model, newdata = data, ...)
+  #       rfPredictResult
+  #     }
+  #   )
+  # )
+  
   predictFunctionLookup <- list(
     'binary' = list(
-      'glmnet' = function() {
-        as.numeric(predict(model$model, data, ...))
-      },
-      'bart' = function() {
-        bartPredictResult <- predict(model$model, newdata = data, ...)
-        if (bartMeanOrMedian == 'mean') {
-          apply(bartPredictResult$prob.test, 2, mean)
-        } else if (bartMeanOrMedian == 'median') {
-          apply(bartPredictResult$prob.test, 2, median)
-        }
-      },
-      'rf' = function() {
-        rfPredictResult <- predict(model$model, newdata = data, ...)
-        rfPredictResult
-      }
+      'glmnet' = predictMPRModelglmnet,
+      'bart' = predictMPRModelBinaryBART,
+      'rf' = predictMPRModelBinaryRF
     ),
     'survival' = list(
-      'glmnet' = function() {
-        as.numeric(predict(model$model, data, ...))
-      },
-      'bart' = function() {
-        # TODO: implement
-      },
-      'rf' = function() {
-        # TODO: implement
-      }
+      'glmnet' = predictMPRModelglmnet
     ),
     'continuous' = list(
-      'glmnet' = function() {
-        as.numeric(predict(model$model, data, ...))
-      },
-      'bart' = function() {
-        bartPredictResult <- predict(model$model, newdata = data, ...)
-        if (bartMeanOrMedian == 'mean') {
-          apply(bartPredictResult, 2, mean)
-        } else if (bartMeanOrMedian == 'median') {
-          apply(bartPredictResult, 2, median)
-        }
-      },
-      'rf' = function() {
-        rfPredictResult <- predict(model$model, newdata = data, ...)
-        rfPredictResult
-      }
+      'glmnet' = predictMPRModelglmnet,
+      'bart' = predictMPRModelContinuousBART,
+      'rf' = predictMPRModelContinuousRF
     )
   )
   
-  predictResult <- predictFunctionLookup[[type]][[method]]()
+  predictResult <- predictFunctionLookup[[type]][[method]](model, data, ...)
   predictResult
 }

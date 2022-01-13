@@ -2,20 +2,20 @@
 % Please edit documentation in R/model_prediction.R
 \name{predictMPRModel}
 \alias{predictMPRModel}
-\title{Title}
+\title{predictMPRModel}
 \usage{
-predictMPRModel(model, data, bartMeanOrMedian = "mean", ...)
+predictMPRModel(model, data, ...)
 }
 \arguments{
-\item{model}{}
+\item{model}{An MPRModel object. This is typically returned from a call to fitMPRModel.}
 
-\item{data}{}
+\item{data}{The data.frame/matrix that the model will be applied to.}
 
-\item{...}{}
+\item{...}{Other arguments to be passed to the method-specific prediction function.}
 }
 \value{
-
+The result from the method-specific predict function.
 }
 \description{
-Title
+predictMPRModel
 }
