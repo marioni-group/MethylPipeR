@@ -1,7 +1,7 @@
 # MethylPipeR
 This package provides functions for running machine learning prediction pipelines with a focus on systematic and reproducible experiments.
 
-## Installation from GitLab
+## Installation from GitHub
 To install MethylPipeR in R, use the following:
 ```r
 remotes::install_github('marioni-group/methylpiper')
