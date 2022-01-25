@@ -7,7 +7,102 @@ To install MethylPipeR in R, use the following:
 remotes::install_github('marioni-group/methylpiper')
 ```
 
+## Pipeline Basics
+Below is an example of a simple MethylPipeR script which fits a glmnet model to simulated training data with a continuous outcome. Cross validation is performed to select a value for lambda.
+Prediction is then performed using a simulated test set. An incremental model is also fit to the test set using the predicted score and a set of covariates.
 
+```r
+library(MethylPipeR)
+
+initLogs('/path/to/log/folder/')
+
+trainingData <- readRDS('/path/to/training/data')
+trainingTarget <- readRDS('/path/to/training/target')
+
+mprModel <- fitMPRModelCV(type = 'continuous',
+                          method = 'glmnet',
+                          trainXs = trainingData,
+                          trainY = trainingTarget,
+                          seed = 42,
+                          save = TRUE)
+
+mprModelTrainingPredictions <- predictMPRModel(mprModel,
+                                               data = trainingData,
+                                               s = 'lambda.min')
+
+testData <- readRDS('/path/to/test/data')
+testTarget <- readRDS('/path/to/test/target')
+
+mprModelTestPredictions <- predictMPRModel(mprModel,
+                                           data = testData,
+                                           s = 'lambda.min')
+
+testCovariates <- readRDS('/path/to/test/covariates')
+
+incrementalDF <- as.data.frame(testCovariates)
+incrementalDF$score <- mprModelTestPredictions
+incrementalDF$y <- testTarget
+
+incrementalResult <- fitMPRModelIncremental(X = incrementalDF, yColname = 'y', covColnames = colnames(testCovariates), scoreColname = 'score', family = 'gaussian')
+```
+
+### Step-by-step
+To set up a MethylPipeR session, first load the package and specify a folder for logs to go into. (This string must end in '/').
+```r
+library(MethylPipeR)
+
+initLogs('/path/to/log/folder/')
+```
+
+Next we load the training data (matrix or data.frame with rows corresopnding to individuals and columns corresponding to variables e.g. CpG sites).
+We also load the target (vector with each element i corresponding to the ith row in the training data).
+```r
+trainingData <- readRDS('/path/to/training/data')
+trainingTarget <- readRDS('/path/to/training/target')
+```
+
+We next fit a glmnet model with continuous output. Cross-validation is used to determine the value of lambda. Training set predictions are then obtained.
+```r
+mprModel <- fitMPRModelCV(type = 'continuous',
+                          method = 'glmnet',
+                          trainXs = trainingData,
+                          trainY = trainingTarget,
+                          seed = 42,
+                          save = TRUE)
+
+mprModelTrainingPredictions <- predictMPRModel(mprModel,
+                                               data = trainingData,
+                                               s = 'lambda.min')
+```
+
+Similarly, we load the test data and target files and obtain test set predictions.
+```r
+testData <- readRDS('/path/to/test/data')
+testTarget <- readRDS('/path/to/test/target')
+
+mprModelTestPredictions <- predictMPRModel(mprModel,
+                                           data = testData,
+                                           s = 'lambda.min')
+```
+
+For incremental modeling, we load a matrix/data.frame of covariates e.g. age, sex and BMI. Rows should correspond to the same individuals as in testData. We then create the data.frame required for the incremental model fitting. 
+```r
+testCovariates <- readRDS('/path/to/test/covariates')
+
+incrementalDF <- as.data.frame(testCovariates)
+incrementalDF$score <- mprModelTestPredictions
+incrementalDF$y <- testTarget
+```
+
+incrementalDF now has columns corresponding to the predicted score, target y and covariates. The incremental model is fit by running the following:
+```r
+incrementalResult <- fitMPRModelIncremental(X = incrementalDF, yColname = 'y', covColnames = colnames(testCovariates), scoreColname = 'score', family = 'gaussian')
+```
+
+Note: currently, console output no longer shows in the R console after initLogs is run. This is due to the output being piped into the console log file. This can be viewed in the folder specified in the initLogs call.
+
+# Old MethylPipeR format
+The remainder of this document describes the old format for MethylPipeR. This will be deprecated in the future but has been used in previous pipeline experiments and is included here for reference.
 ## Pipeline Basics
 Pipeline instances are defined in an R script with the following function calls:
 
