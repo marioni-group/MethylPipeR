@@ -90,6 +90,12 @@ fitMPRModel <- function(type, # 'binary', 'survival', or 'continuous'
     )
   )
   
+  logSessionLines('Fitting MPRModel.',
+                  paste0('Model type: ', type),
+                  paste0('Model method: ', method),
+                  paste0('Using cross-validation for hyperparameter selection: ', FALSE),
+                  'Additional fitMPRModel parameters:',
+                  capture.output(print(...)))
   model <- fitFunctionLookup[[type]][[method]](trainXs, trainY, testXs, testY, tteColname, eventColname, parallel, seed, ...)
   modelObject <- structure(list(model = model, modelType = type, modelMethod = method), class = 'MPRModel')
   if (save) {
@@ -110,6 +116,7 @@ fitMPRModel <- function(type, # 'binary', 'survival', or 'continuous'
 #' @param eventColname A string corresponding to the event column name in trainY/testY. Only required if type == 'survival'.
 #' @param parallel A boolean specifying whether parallel computation should be used in model fitting.
 #' @param seed An integer to set the random seed to for model fitting.
+#' @param save A boolean specifying if the model object should be saved to the logs.
 #' @param nFolds The number of cross-validation folds to use.
 #' @param foldID A vector of integers with length equal to the number of rows in trainXs. Each element represents the fold number assigned to the corresponding row.
 #' @param ... The remaining parameters to be passed to the cross-validation function.
@@ -128,6 +135,7 @@ fitMPRModelCV <- function(type, # 'binary', 'survival', or 'continuous'
                           eventColname = 'Event',
                           parallel = FALSE,
                           seed = NULL,
+                          save = TRUE,
                           nFolds = 3,
                           foldID = NULL,
                           ...) {
@@ -206,8 +214,18 @@ fitMPRModelCV <- function(type, # 'binary', 'survival', or 'continuous'
       }
     )
   )
+  logSessionLines('Fitting MPRModel.',
+                  paste0('Model type: ', type),
+                  paste0('Model method: ', method),
+                  paste0('Using cross-validation for hyperparameter selection: ', TRUE),
+                  'Additional fitMPRModel parameters:',
+                  capture.output(print(...)))
   model <- fitFunctionLookup[[type]][[method]]()
-  structure(list(model = model, modelType = type, modelMethod = method), class = 'MPRModel')
+  modelObject <- structure(list(model = model, modelType = type, modelMethod = method), class = 'MPRModel')
+  if (save) {
+    saveMPRModelObject(modelObject)
+  }
+  modelObject
 }
 
 #' Title

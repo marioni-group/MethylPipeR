@@ -15,6 +15,7 @@ fitMPRModelCV(
   eventColname = "Event",
   parallel = FALSE,
   seed = NULL,
+  save = TRUE,
   nFolds = 3,
   foldID = NULL,
   ...
@@ -40,6 +41,8 @@ fitMPRModelCV(
 \item{parallel}{A boolean specifying whether parallel computation should be used in model fitting.}
 
 \item{seed}{An integer to set the random seed to for model fitting.}
+
+\item{save}{A boolean specifying if the model object should be saved to the logs.}
 
 \item{nFolds}{The number of cross-validation folds to use.}
 
