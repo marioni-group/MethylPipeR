@@ -13,7 +13,7 @@ initLogs <- function(sessionLogFolder) {
   options(mprSessionLogFilepath = paste0(sessionLogFolder, sessionLogFilename))
   sessionConsoleFilepath <- paste0(sessionLogFolder, 'console_log_', sessionStartTimestamp, '.txt')
   options(mprSessionConsoleFilepath = sessionConsoleFilepath)
-  sink(sessionConsoleFilepath)
+  sink(sessionConsoleFilepath, split = TRUE)
   initSessionLogFile()
 }
 

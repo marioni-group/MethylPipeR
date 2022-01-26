@@ -95,7 +95,7 @@ fitMPRModel <- function(type, # 'binary', 'survival', or 'continuous'
                   paste0('Model method: ', method),
                   paste0('Using cross-validation for hyperparameter selection: ', FALSE),
                   'Additional fitMPRModel parameters:',
-                  capture.output(print(...)))
+                  capture.output(print(list(...))))
   model <- fitFunctionLookup[[type]][[method]](trainXs, trainY, testXs, testY, tteColname, eventColname, parallel, seed, ...)
   modelObject <- structure(list(model = model, modelType = type, modelMethod = method), class = 'MPRModel')
   if (save) {
@@ -104,7 +104,7 @@ fitMPRModel <- function(type, # 'binary', 'survival', or 'continuous'
   modelObject
 }
 
-#' Title
+#' fitMPRModelCV
 #'
 #' @param type A string representing the type of model. Can be 'binary', 'survival' or 'continuous'.
 #' @param method The modelling method. Currently supports 'glmnet', 'bart' and 'rf'.
@@ -123,8 +123,6 @@ fitMPRModel <- function(type, # 'binary', 'survival', or 'continuous'
 #'
 #' @return
 #' @export
-#'
-#' @examples
 fitMPRModelCV <- function(type, # 'binary', 'survival', or 'continuous'
                           method, # 'glmnet', 'bart', or 'rf'
                           trainXs, 
@@ -219,7 +217,7 @@ fitMPRModelCV <- function(type, # 'binary', 'survival', or 'continuous'
                   paste0('Model method: ', method),
                   paste0('Using cross-validation for hyperparameter selection: ', TRUE),
                   'Additional fitMPRModel parameters:',
-                  capture.output(print(...)))
+                  capture.output(print(list(...))))
   model <- fitFunctionLookup[[type]][[method]]()
   modelObject <- structure(list(model = model, modelType = type, modelMethod = method), class = 'MPRModel')
   if (save) {
@@ -228,18 +226,16 @@ fitMPRModelCV <- function(type, # 'binary', 'survival', or 'continuous'
   modelObject
 }
 
-#' Title
+#' fitMPRModelIncremental
 #'
-#' @param X 
-#' @param yColname 
-#' @param covColnames 
-#' @param scoreColname 
-#' @param family 
+#' @param X A data.frame containing columns corresponding to yColname, covColnames and scoreColname.
+#' @param yColname The name of the column representing the response variable.
+#' @param covColnames A vector of names representing the covariate columns.
+#' @param scoreColname The name of the score column.
+#' @param family The glm family string. 'binomial' for binary response. 'gaussian' for continuous response.
 #'
-#' @return
+#' @return A list containing results for the null (covariates only) model and full model (score and covariates). For each model, the formula, response and glm model object are provided.
 #' @export
-#'
-#' @examples
 fitMPRModelIncremental <- function(X, yColname, covColnames, scoreColname, family = 'binomial') {
   nullFormulaString <- paste(yColname, paste(covColnames, collapse = ' + '), sep = ' ~ ')
   nullModel <- glm(as.formula(nullFormulaString), family = family, data = X)

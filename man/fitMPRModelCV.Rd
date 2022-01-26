@@ -2,7 +2,7 @@
 % Please edit documentation in R/model_fitting.R
 \name{fitMPRModelCV}
 \alias{fitMPRModelCV}
-\title{Title}
+\title{fitMPRModelCV}
 \usage{
 fitMPRModelCV(
   type,
@@ -54,5 +54,5 @@ fitMPRModelCV(
 
 }
 \description{
-Title
+fitMPRModelCV
 }

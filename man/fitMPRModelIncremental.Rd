@@ -2,7 +2,7 @@
 % Please edit documentation in R/model_fitting.R
 \name{fitMPRModelIncremental}
 \alias{fitMPRModelIncremental}
-\title{Title}
+\title{fitMPRModelIncremental}
 \usage{
 fitMPRModelIncremental(
   X,
@@ -13,19 +13,19 @@ fitMPRModelIncremental(
 )
 }
 \arguments{
-\item{X}{}
+\item{X}{A data.frame containing columns corresponding to yColname, covColnames and scoreColname.}
 
-\item{yColname}{}
+\item{yColname}{The name of the column representing the response variable.}
 
-\item{covColnames}{}
+\item{covColnames}{A vector of names representing the covariate columns.}
 
-\item{scoreColname}{}
+\item{scoreColname}{The name of the score column.}
 
-\item{family}{}
+\item{family}{The glm family string. 'binomial' for binary response. 'gaussian' for continuous response.}
 }
 \value{
-
+A list containing results for the null (covariates only) model and full model (score and covariates). For each model, the formula, response and glm model object are provided.
 }
 \description{
-Title
+fitMPRModelIncremental
 }
