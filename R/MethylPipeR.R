@@ -19,6 +19,9 @@
 #' @importFrom randomForestSRC rfsrc
 #' @importFrom graphics abline
 #' @importFrom performance performance_roc
+#' @importFrom bigmemory big.matrix is.big.matrix as.big.matrix
+#' @importFrom biglasso biglasso cv.biglasso
+#' @importFrom bigmemoryExt cbindBM
 #' @import e1071
 #' @import see
 NULL

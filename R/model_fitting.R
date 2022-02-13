@@ -75,16 +75,19 @@ fitMPRModel <- function(type, # 'binary', 'survival', or 'continuous'
   fitFunctionLookup <- list(
     'binary' = list(
       'glmnet' = fitMPRModelBinaryglmnet,
+      'biglasso' = fitMPRModelBinarybiglasso,
       'bart' = fitMPRModelBinaryBART,
       'rf' = fitMPRModelBinaryRF
     ),
     'survival' = list(
       'glmnet' = fitMPRModelSurvivalglmnet,
+      'biglasso' = fitMPRModelSurvivalbiglasso,
       'bart' = fitMPRModelSurvivalBART,
       'rf' = fitMPRModelSurvivalRF
     ),
     'continuous' = list(
       'glmnet' = fitMPRModelContinuousglmnet,
+      'biglasso' = fitMPRModelContinuousbiglasso,
       'bart' = fitMPRModelContinuousBART,
       'rf' = fitMPRModelContinuousRF
     )
@@ -171,6 +174,12 @@ fitMPRModelCV <- function(type, # 'binary', 'survival', or 'continuous'
       'glmnet' = function() {
         cv.glmnet(x = trainXs, y = trainY, family = 'binomial', nfolds = nFolds, foldid = foldID, ...)
       },
+      'biglasso' = function() {
+        nCols <- ncol(trainXs)
+        
+        trainXsBig <- cbindBM(as.big.matrix(trainXs[, 1:(nCols/2)]), as.big.matrix(trainXs[, (nCols/2 + 1):nCols]))
+        cv.biglasso(trainXsBig, trainY, family = 'binomial', nfolds = nFolds, foldid = foldID, ...)
+      },
       'bart' = function() {
         if (is.null(testXs)) {
           testXs <- trainXs
@@ -190,6 +199,16 @@ fitMPRModelCV <- function(type, # 'binary', 'survival', or 'continuous'
       'glmnet' = function() {
         cv.glmnet(x = trainXs, y = Surv(trainY[, tteColname], trainY[, eventColname]), family = 'cox', nfolds = nFolds, foldid = foldID, ...)
       },
+      'biglasso' = function() {
+        nCols <- ncol(trainXs)
+        
+        # BigLasso requires the y matrix column names to be 'time' and 'status'
+        trainY <- trainY[, c(tteColname, eventColname)]
+        colnames(trainY) <- c('time', 'status')
+        
+        trainXsBig <- cbindBM(as.big.matrix(trainXs[, 1:(nCols/2)]), as.big.matrix(trainXs[, (nCols/2 + 1):nCols]))
+        cv.biglasso(trainXsBig, trainY, family = 'cox', nfolds = nFolds, foldid = foldID, ...)
+      },
       'bart' = function() {
         mc.surv.bart(x.train = trainXs, y.train = trainY)
       },
@@ -202,6 +221,12 @@ fitMPRModelCV <- function(type, # 'binary', 'survival', or 'continuous'
     'continuous' = list(
       'glmnet' = function() {
         cv.glmnet(x = trainXs, y = trainY, family = 'gaussian', nfolds = nFolds, foldid = foldID, ...)
+      },
+      'biglasso' = function() {
+        nCols <- ncol(trainXs)
+        
+        trainXsBig <- cbindBM(as.big.matrix(trainXs[, 1:(nCols/2)]), as.big.matrix(trainXs[, (nCols/2 + 1):nCols]))
+        cv.biglasso(trainXsBig, trainY, family = 'gaussian', nfolds = nFolds, foldid = foldID, ...)
       },
       'bart' = function() {
         # TODO: Complete

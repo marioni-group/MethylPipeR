@@ -2,6 +2,13 @@ fitMPRModelBinaryglmnet <- function(trainXs, trainY, testXs, testY, tteColname, 
   glmnet(x = trainXs, y = trainY, family = 'binomial', ...)
 }
 
+fitMPRModelBinarybiglasso <- function(trainXs, trainY, testXs, testY, tteColname, eventColname, parallel, seed, ...) {
+  # To avoid 'LongVector not supported' error
+  nCols <- ncol(trainXs)
+  trainXsBig <- cbindBM(as.big.matrix(trainXs[, 1:(nCols/2)]), as.big.matrix(trainXs[, (nCols/2 + 1):nCols]))
+  biglasso(trainXsBig, trainY, family = 'binomial', ...)
+}
+
 fitMPRModelBinaryBART <- function(trainXs, trainY, testXs, tteColname, eventColname, testY, parallel, seed, ...) {
   if (is.null(testXs)) {
     testXs <- trainXs
@@ -22,6 +29,13 @@ fitMPRModelContinuousglmnet <- function(trainXs, trainY, testXs, testY, tteColna
   glmnet(x = trainXs, y = trainY, family = 'gaussian', ...)
 }
 
+fitMPRModelContinuousbiglasso <- function(trainXs, trainY, testXs, testY, tteColname, eventColname, parallel, seed, ...) {
+  # To avoid 'LongVector not supported' error
+  nCols <- ncol(trainXs)
+  trainXsBig <- cbindBM(as.big.matrix(trainXs[, 1:(nCols/2)]), as.big.matrix(trainXs[, (nCols/2 + 1):nCols]))
+  biglasso(trainXsBig, trainY, family = 'gaussian', ...)
+}
+
 fitMPRModelContinuousBART <- function(trainXs, trainY, testXs, testY, tteColname, eventColname, parallel, seed, ...) {
   if (is.null(testXs)) {
     testXs <- trainXs
@@ -40,6 +54,17 @@ fitMPRModelContinuousRF <- function(trainXs, trainY, testXs, testY, tteColname, 
 
 fitMPRModelSurvivalglmnet <- function(trainXs, trainY, testXs, testY, tteColname, eventColname, parallel, seed, ...) {
   glmnet(x = trainXs, y = Surv(trainY[, tteColname], trainY[, eventColname]), family = 'cox', ...)
+}
+
+fitMPRModelSurvivalbiglasso <- function(trainXs, trainY, testXs, testY, tteColname, eventColname, parallel, seed, ...) {
+  # To avoid 'LongVector not supported' error
+  nCols <- ncol(trainXs)
+  trainXsBig <- cbindBM(as.big.matrix(trainXs[, 1:(nCols/2)]), as.big.matrix(trainXs[, (nCols/2 + 1):nCols]))
+  
+  # BigLasso requires the y matrix column names to be 'time' and 'status'
+  trainY <- trainY[, c(tteColname, eventColname)]
+  colnames(trainY) <- c('time', 'status')
+  biglasso(trainXsBig, as.matrix(trainY), family = 'cox', ...)
 }
 
 fitMPRModelSurvivalBART <- function(trainXs, trainY, testXs, testY, tteColname, eventColname, parallel, seed, ...) {

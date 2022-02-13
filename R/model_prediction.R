@@ -15,65 +15,20 @@ predictMPRModel <- function(model, data,  ...) {
   type <- model$modelType
   method <- model$modelMethod
   
-  # predictFunctionLookup <- list(
-  #   'binary' = list(
-  #     'glmnet' = function() {
-  #       as.numeric(predict(model$model, data, ...))
-  #     },
-  #     'bart' = function() {
-  #       bartPredictResult <- predict(model$model, newdata = data, ...)
-  #       if (bartMeanOrMedian == 'mean') {
-  #         apply(bartPredictResult$prob.test, 2, mean)
-  #       } else if (bartMeanOrMedian == 'median') {
-  #         apply(bartPredictResult$prob.test, 2, median)
-  #       }
-  #     },
-  #     'rf' = function() {
-  #       rfPredictResult <- predict(model$model, newdata = data, ...)
-  #       rfPredictResult
-  #     }
-  #   ),
-  #   'survival' = list(
-  #     'glmnet' = function() {
-  #       as.numeric(predict(model$model, data, ...))
-  #     },
-  #     'bart' = function() {
-  #       # TODO: implement
-  #     },
-  #     'rf' = function() {
-  #       # TODO: implement
-  #     }
-  #   ),
-  #   'continuous' = list(
-  #     'glmnet' = function() {
-  #       as.numeric(predict(model$model, data, ...))
-  #     },
-  #     'bart' = function() {
-  #       bartPredictResult <- predict(model$model, newdata = data, ...)
-  #       if (bartMeanOrMedian == 'mean') {
-  #         apply(bartPredictResult, 2, mean)
-  #       } else if (bartMeanOrMedian == 'median') {
-  #         apply(bartPredictResult, 2, median)
-  #       }
-  #     },
-  #     'rf' = function() {
-  #       rfPredictResult <- predict(model$model, newdata = data, ...)
-  #       rfPredictResult
-  #     }
-  #   )
-  # )
-  
   predictFunctionLookup <- list(
     'binary' = list(
       'glmnet' = predictMPRModelglmnet,
+      'biglasso' = predictMPRModelbiglasso,
       'bart' = predictMPRModelBinaryBART,
       'rf' = predictMPRModelBinaryRF
     ),
     'survival' = list(
-      'glmnet' = predictMPRModelglmnet
+      'glmnet' = predictMPRModelglmnet,
+      'biglasso' = predictMPRModelbiglasso
     ),
     'continuous' = list(
       'glmnet' = predictMPRModelglmnet,
+      'biglasso' = predictMPRModelbiglasso,
       'bart' = predictMPRModelContinuousBART,
       'rf' = predictMPRModelContinuousRF
     )
