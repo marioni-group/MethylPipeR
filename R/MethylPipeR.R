@@ -3,7 +3,7 @@
 #' @importFrom glmnet cv.glmnet glmnet
 #' @importFrom doParallel registerDoParallel
 #' @importFrom tictoc tic toc tic.log
-#' @importFrom caret confusionMatrix
+#' @importFrom caret confusionMatrix groupKFold
 #' @importFrom survival Surv coxph
 #' @importFrom ggplot2 ggplot geom_density ggtitle xlab ylab ggsave aes
 #' @importFrom dplyr %>% sym
