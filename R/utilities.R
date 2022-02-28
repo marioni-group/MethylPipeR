@@ -8,7 +8,7 @@ checkNA <- function(x, stop = TRUE) {
 }
 
 checkMatrixOrDF <- function(x) {
-  if (!(is.matrix(x) | is.data.frame(x))) {
+  if (!(is.matrix(x) | is.data.frame(x) | is.big.matrix(x))) {
     stop('Input should be a matrix or data.frame!')
   }
 }
@@ -81,7 +81,7 @@ getGroupCVFoldIDs <- function(groups, nFolds, seed = NULL) {
     }
   }
   foldIDs <- sapply(groups, function(x) {
-    groupToFoldMap[[x]]
+    groupToFoldMap[[as.character(x)]]
   })
   
   list(foldIDs = foldIDs, groupToFoldMap = groupToFoldMap, foldToNElementsMap = foldToNElementsMap)

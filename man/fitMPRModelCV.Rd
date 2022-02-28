@@ -18,6 +18,7 @@ fitMPRModelCV(
   save = TRUE,
   nFolds = 3,
   foldID = NULL,
+  saveSuffix = NULL,
   ...
 )
 }
@@ -47,6 +48,8 @@ fitMPRModelCV(
 \item{nFolds}{The number of cross-validation folds to use.}
 
 \item{foldID}{A vector of integers with length equal to the number of rows in trainXs. Each element represents the fold number assigned to the corresponding row.}
+
+\item{saveSuffix}{Optional - a custom suffix to include in the filename of the saved model object after the timestamp.}
 
 \item{...}{The remaining parameters to be passed to the cross-validation function.}
 }

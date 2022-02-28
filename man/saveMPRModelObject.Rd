@@ -4,10 +4,12 @@
 \alias{saveMPRModelObject}
 \title{Saves a MPRModel object to the logging folder.}
 \usage{
-saveMPRModelObject(model)
+saveMPRModelObject(model, suffix = NULL)
 }
 \arguments{
 \item{model}{The MPRModel object to be saved.}
+
+\item{suffix}{Optional - a custom suffix to include in the filename after the timestamp.}
 }
 \value{
 

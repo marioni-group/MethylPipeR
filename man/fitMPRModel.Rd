@@ -16,6 +16,7 @@ fitMPRModel(
   parallel = FALSE,
   seed = NULL,
   save = TRUE,
+  saveSuffix = NULL,
   ...
 )
 }
@@ -41,6 +42,8 @@ fitMPRModel(
 \item{seed}{An integer to set the random seed to for model fitting.}
 
 \item{save}{A boolean specifying if the model object should be saved to the logs.}
+
+\item{saveSuffix}{Optional - a custom suffix to include in the filename of the saved model object after the timestamp.}
 
 \item{...}{Other arguments to be passed to the method-specific fitting function.}
 }

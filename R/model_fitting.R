@@ -12,6 +12,7 @@
 #' @param parallel A boolean specifying whether parallel computation should be used in model fitting.
 #' @param seed An integer to set the random seed to for model fitting.
 #' @param save A boolean specifying if the model object should be saved to the logs.
+#' @param saveSuffix Optional - a custom suffix to include in the filename of the saved model object after the timestamp.
 #' @param ... Other arguments to be passed to the method-specific fitting function.
 #'
 #' @return A MPRModel object with the fitted model.
@@ -27,6 +28,7 @@ fitMPRModel <- function(type, # 'binary', 'survival', or 'continuous'
                         parallel = FALSE,
                         seed = NULL,
                         save = TRUE,
+                        saveSuffix = NULL,
                         ...) {
   
   # Check input type and presence of missing values. The rest of the function assumes complete data
@@ -102,7 +104,7 @@ fitMPRModel <- function(type, # 'binary', 'survival', or 'continuous'
   model <- fitFunctionLookup[[type]][[method]](trainXs, trainY, testXs, testY, tteColname, eventColname, parallel, seed, ...)
   modelObject <- structure(list(model = model, modelType = type, modelMethod = method), class = 'MPRModel')
   if (save) {
-    saveMPRModelObject(modelObject)
+    saveMPRModelObject(modelObject, saveSuffix)
   }
   modelObject
 }
@@ -122,6 +124,7 @@ fitMPRModel <- function(type, # 'binary', 'survival', or 'continuous'
 #' @param save A boolean specifying if the model object should be saved to the logs.
 #' @param nFolds The number of cross-validation folds to use.
 #' @param foldID A vector of integers with length equal to the number of rows in trainXs. Each element represents the fold number assigned to the corresponding row.
+#' @param saveSuffix Optional - a custom suffix to include in the filename of the saved model object after the timestamp.
 #' @param ... The remaining parameters to be passed to the cross-validation function.
 #'
 #' @return
@@ -139,6 +142,7 @@ fitMPRModelCV <- function(type, # 'binary', 'survival', or 'continuous'
                           save = TRUE,
                           nFolds = 3,
                           foldID = NULL,
+                          saveSuffix = NULL,
                           ...) {
   # Check input type and presence of missing values. The rest of the function assumes complete data
   checkNA(trainXs)
@@ -178,7 +182,7 @@ fitMPRModelCV <- function(type, # 'binary', 'survival', or 'continuous'
         nCols <- ncol(trainXs)
         
         trainXsBig <- cbindBM(as.big.matrix(trainXs[, 1:(nCols/2)]), as.big.matrix(trainXs[, (nCols/2 + 1):nCols]))
-        cv.biglasso(trainXsBig, trainY, family = 'binomial', nfolds = nFolds, foldid = foldID, ...)
+        cv.biglasso(trainXsBig, trainY, family = 'binomial', nfolds = nFolds, cv.ind = foldID, ...)
       },
       'bart' = function() {
         if (is.null(testXs)) {
@@ -207,7 +211,7 @@ fitMPRModelCV <- function(type, # 'binary', 'survival', or 'continuous'
         colnames(trainY) <- c('time', 'status')
         
         trainXsBig <- cbindBM(as.big.matrix(trainXs[, 1:(nCols/2)]), as.big.matrix(trainXs[, (nCols/2 + 1):nCols]))
-        cv.biglasso(trainXsBig, trainY, family = 'cox', nfolds = nFolds, foldid = foldID, ...)
+        cv.biglasso(trainXsBig, trainY, family = 'cox', nfolds = nFolds, cv.ind = foldID, ...)
       },
       'bart' = function() {
         mc.surv.bart(x.train = trainXs, y.train = trainY)
@@ -226,7 +230,7 @@ fitMPRModelCV <- function(type, # 'binary', 'survival', or 'continuous'
         nCols <- ncol(trainXs)
         
         trainXsBig <- cbindBM(as.big.matrix(trainXs[, 1:(nCols/2)]), as.big.matrix(trainXs[, (nCols/2 + 1):nCols]))
-        cv.biglasso(trainXsBig, trainY, family = 'gaussian', nfolds = nFolds, foldid = foldID, ...)
+        cv.biglasso(trainXsBig, trainY, family = 'gaussian', nfolds = nFolds, cv.ind = foldID, ...)
       },
       'bart' = function() {
         # TODO: Complete
@@ -246,7 +250,7 @@ fitMPRModelCV <- function(type, # 'binary', 'survival', or 'continuous'
   model <- fitFunctionLookup[[type]][[method]]()
   modelObject <- structure(list(model = model, modelType = type, modelMethod = method), class = 'MPRModel')
   if (save) {
-    saveMPRModelObject(modelObject)
+    saveMPRModelObject(modelObject, saveSuffix)
   }
   modelObject
 }

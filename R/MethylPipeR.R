@@ -10,9 +10,9 @@
 #' @importFrom ROCR prediction performance
 #' @importFrom RColorBrewer brewer.pal brewer.pal.info
 #' @importFrom grDevices recordPlot
-#' @importFrom graphics legend
-#' @importFrom stats sd as.formula coef glm predict
-#' @importFrom utils head read.csv write.csv
+#' @importFrom graphics legend lines par points
+#' @importFrom stats sd as.formula coef glm predict median
+#' @importFrom utils head read.csv write.csv capture.output
 #' @importFrom ROCR prediction performance
 #' @importFrom MLmetrics PRAUC
 #' @importFrom randomForest randomForest
@@ -22,6 +22,7 @@
 #' @importFrom bigmemory big.matrix is.big.matrix as.big.matrix
 #' @importFrom biglasso biglasso cv.biglasso
 #' @importFrom bigmemoryExt cbindBM
+#' @importFrom methods S3Class
 #' @import e1071
 #' @import see
 NULL

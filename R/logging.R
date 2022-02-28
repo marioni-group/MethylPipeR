@@ -49,15 +49,16 @@ logSessionLines <- function(...) {
 #' Saves a MPRModel object to the logging folder.
 #'
 #' @param model The MPRModel object to be saved.
+#' @param suffix Optional - a custom suffix to include in the filename after the timestamp.
 #'
 #' @return
 #' @export
-saveMPRModelObject <- function(model) {
+saveMPRModelObject <- function(model, suffix = NULL) {
   sessionStartTimestamp <- getOption('mprSessionStartTimestamp')
   sessionLogFolder <- getOption('mprSessionLogFolder')
   folderPath <- paste0(sessionLogFolder, 'models_', sessionStartTimestamp, '/')
   dir.create(paste0(folderPath))
-  filePath <- paste0(folderPath, model$modelType, '_', model$modelMethod, '_', format(Sys.time(), '%Y_%m_%d_%H_%M_%S'), '.rds')
+  filePath <- paste0(folderPath, model$modelType, '_', model$modelMethod, '_', format(Sys.time(), '%Y_%m_%d_%H_%M_%S'), suffix, '.rds')
   saveRDS(model, file = filePath)
   logSessionLines(paste0('Saved model in ', filePath))
 }
