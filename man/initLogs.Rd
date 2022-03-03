@@ -4,10 +4,12 @@
 \alias{initLogs}
 \title{To be called at the beginning of a MethylPipeR session. Initialises logging and model saving functionality.}
 \usage{
-initLogs(sessionLogFolder)
+initLogs(sessionLogFolder, note = "MethylPipeR pipeline run (no note given).")
 }
 \arguments{
 \item{sessionLogFolder}{The path of the folder that logs and model objects should be saved to. Must end in "/".}
+
+\item{note}{A note which will be saved at the top of the session log - can help to identify a specific pipeline run when checking the pipeline logs.}
 }
 \value{
 

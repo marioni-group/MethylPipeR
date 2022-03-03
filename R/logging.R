@@ -1,10 +1,11 @@
 #' To be called at the beginning of a MethylPipeR session. Initialises logging and model saving functionality.
 #'
 #' @param sessionLogFolder The path of the folder that logs and model objects should be saved to. Must end in "/".
+#' @param note A note which will be saved at the top of the session log - can help to identify a specific pipeline run when checking the pipeline logs.
 #'
 #' @return
 #' @export
-initLogs <- function(sessionLogFolder) {
+initLogs <- function(sessionLogFolder, note = 'MethylPipeR pipeline run (no note given).') {
   sessionStartTimestamp <- format(Sys.time(), '%Y_%m_%d_%H_%M_%S')
   options(mprSessionStartTimestamp = sessionStartTimestamp)
   options(mprSessionLogFolder = sessionLogFolder)
@@ -14,14 +15,15 @@ initLogs <- function(sessionLogFolder) {
   sessionConsoleFilepath <- paste0(sessionLogFolder, 'console_log_', sessionStartTimestamp, '.txt')
   options(mprSessionConsoleFilepath = sessionConsoleFilepath)
   sink(sessionConsoleFilepath, split = TRUE)
-  initSessionLogFile()
+  initSessionLogFile(note)
 }
 
-initSessionLogFile <- function() {
+initSessionLogFile <- function(note) {
   sessionStartTimestamp <- getOption('mprSessionStartTimestamp')
   sessionLogFilepath <- getOption('mprSessionLogFilepath')
   sessionLogFile <- file(sessionLogFilepath)
-  writeLines(paste0('Starting MethylPipeR-UI session. Timestamp: ', sessionStartTimestamp), sessionLogFile)
+  writeLines(note, sessionLogFile)
+  writeLines(paste0('Starting MethylPipeR session. Timestamp: ', sessionStartTimestamp), sessionLogFile)
   close(sessionLogFile)
 }
 
