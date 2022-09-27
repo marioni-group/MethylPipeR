@@ -7,10 +7,12 @@
 createClassWeights(classes)
 }
 \arguments{
-\item{classes}{A vector or list of binary 1 and 0 values corresponding to e.g. positive and negative classes respectively.}
+\item{classes}{A vector or list of binary 1 and 0 values corresponding to
+e.g. positive and negative classes respectively.}
 }
 \value{
-A vector of the same length as classes. Each element is the weight for the corresponding element in classes.
+A vector of the same length as classes. Each element is the weight
+  for the corresponding element in classes.
 }
 \description{
 createClassWeights

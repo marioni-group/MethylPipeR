@@ -2,13 +2,16 @@
 % Please edit documentation in R/pipeline_modules.R
 \name{endPipelineRun}
 \alias{endPipelineRun}
-\title{To be called at the end of a pipeline run. Saves the pipelineRunInformation to a file. Saves the pipeline timing logs to a file.}
+\title{To be called at the end of a pipeline run. Saves the pipelineRunInformation 
+to a file. Saves the pipeline timing logs to a file.}
 \usage{
 endPipelineRun(pipelineRunInformation)
 }
 \arguments{
-\item{pipelineRunInformation}{The list of pipeline run information entries (originally output by beginPipelineRun).}
+\item{pipelineRunInformation}{The list of pipeline run information entries
+(originally output by \code{beginPipelineRun}).}
 }
 \description{
-To be called at the end of a pipeline run. Saves the pipelineRunInformation to a file. Saves the pipeline timing logs to a file.
+To be called at the end of a pipeline run. Saves the pipelineRunInformation 
+to a file. Saves the pipeline timing logs to a file.
 }

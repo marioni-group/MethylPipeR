@@ -7,12 +7,18 @@
 removeDeathsFromControls(targetToFilter, objectsToFilter)
 }
 \arguments{
-\item{targetToFilter}{A matrix or data.frame with a binary 1/0 column named 'dead' and a binary column named 'Event'}
+\item{targetToFilter}{A matrix or data.frame with a binary 1/0 column named
+'dead' and a binary column named 'Event'}
 
-\item{objectsToFilter}{A list of matrix or data.frame objects each with the same number of rows as targetToFilter. These objects will also have the same rows removed as targetToFilter.}
+\item{objectsToFilter}{A list of matrix or data.frame objects each with the
+same number of rows as targetToFilter. These objects will also have the
+same rows removed as targetToFilter.}
 }
 \value{
-A list with elements targetFiltered (a matrix/data.frame) and objectsToFilter (a list of matrix/data.frames) corresponding to targetToFilter and objectsToFilter with rows corresponding to deaths in controls (dead == 1, Event == 0) removed
+A list with elements \code{targetFiltered} (a matrix/data.frame) and
+  \code{objectsToFilter} (a list of matrix/data.frames) corresponding to
+  \code{targetToFilter} and \code{objectsToFilter} with rows corresponding to
+  deaths in controls (dead == 1, Event == 0) removed
 }
 \description{
 removeDeathsFromControls

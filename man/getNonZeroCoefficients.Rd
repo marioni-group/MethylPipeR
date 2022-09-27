@@ -9,9 +9,12 @@ getNonZeroCoefficients(model, pipelineRunInformation, modelLabel)
 \arguments{
 \item{model}{A glmnet model object.}
 
-\item{pipelineRunInformation}{The object originally created by beginPipelineRun.}
+\item{pipelineRunInformation}{The object originally created by
+\code{\link{beginPipelineRun}}.}
 
-\item{modelLabel}{A string that will act as a label for this function call. The label will be used as a prefix for the saved object filenames in this function call.}
+\item{modelLabel}{A string that will act as a label for this function call.
+The label will be used as a prefix for the saved object filenames in this
+function call.}
 }
 \value{
 A data.frame containing the non-zero model coefficients.

@@ -18,28 +18,38 @@ trainAndTestRF(
 )
 }
 \arguments{
-\item{trainXs}{A matrix/data.frame corresponding to X (variables) in the training set. Columns should correspond to features}
+\item{trainXs}{A matrix/data.frame corresponding to X (variables) in the
+training set. Columns should correspond to features}
 
-\item{trainY}{A vector/list corresponding to Y (labels) in the training set.}
+\item{trainY}{A vector/list corresponding to Y (labels) in the
+training set.}
 
-\item{testXs}{A matrix/data.frame corresponding to X (variables) in the test set. Columns should correspond to the same features in trainXs. If not provided, trainXs is used as testXs.}
+\item{testXs}{A matrix/data.frame corresponding to X (variables) in the test
+set. Columns should correspond to the same features in \code{trainXs}. If
+not provided, \code{trainXs} is used as \code{testXs}.}
 
-\item{testY}{A vector/list corresponding to Y (labels) in the test set. If not provided, trainY is used as testY.}
+\item{testY}{A vector/list corresponding to Y (labels) in the test set. If
+not provided, \code{trainY} is used as \code{testY}.}
 
-\item{metric}{'AUC' or 'PRAUC'. The metric to be calculated on test set prediction.}
+\item{metric}{'AUC' or 'PRAUC'. The metric to be calculated on test set
+prediction.}
 
 \item{ntree}{The number of trees to fit in the model.}
 
-\item{mtry}{The number of features to be selected at random and considered at each node during tree fitting.}
+\item{mtry}{The number of features to be selected at random and considered at
+each node during tree fitting.}
 
 \item{nodesize}{The minimum size of terminal nodes.}
 
-\item{pipelineRunInformation}{The object originally created by beginPipelineRun.}
+\item{pipelineRunInformation}{The object originally created by
+\code{\link{beginPipelineRun}}.}
 
-\item{logOverride}{NULL, TRUE or FALSE. Used to override the 'log' entry in pipelineRunInformation. Ignored if NULL.}
+\item{logOverride}{\code{NULL}, \code{TRUE} or \code{FALSE}. Used to override
+the 'log' entry in \code{pipelineRunInformation}. Ignored if NULL.}
 }
 \value{
-A list containing the model and the metric calculated for test set prediction.
+A list containing the model and the metric calculated for test set
+  prediction.
 }
 \description{
 trainAndTestRF

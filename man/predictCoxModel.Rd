@@ -9,11 +9,12 @@ predictCoxModel(model, xs, pipelineRunInformation, modelLabel)
 \arguments{
 \item{model}{A Cox glmnet model object.}
 
-\item{xs}{A matrix/data.frame corresponding to X (variables). Columns should correspond to features.}
+\item{xs}{A matrix/data.frame corresponding to X (variables). Columns should
+correspond to features.}
 
-\item{pipelineRunInformation}{The object originally created by beginPipelineRun.}
-
-\item{modelLabel}{A string that will act as a label for this function call. The label will be used as a prefix for the saved object filenames in this function call.}
+\item{modelLabel}{A string that will act as a label for this function call.
+The label will be used as a prefix for the saved object file names in this
+function call.}
 }
 \value{
 A vector of model predictions.

@@ -2,7 +2,8 @@
 % Please edit documentation in R/pipeline_modules.R
 \name{calculateMetricsBinaryClassifier}
 \alias{calculateMetricsBinaryClassifier}
-\title{Given model predictions and labels, calculates binary classification performance metrics}
+\title{Given model predictions and labels, calculates binary classification
+performance metrics}
 \usage{
 calculateMetricsBinaryClassifier(
   modelPredictions,
@@ -14,15 +15,20 @@ calculateMetricsBinaryClassifier(
 \arguments{
 \item{modelPredictions}{A vector of model predictions.}
 
-\item{y}{A matrix/data.frame with a column named 'Event' corresponding to a binary label.}
+\item{y}{A matrix/data.frame with a column named 'Event' corresponding to a
+binary label.}
 
-\item{pipelineRunInformation}{The object originally created by beginPipelineRun.}
+\item{pipelineRunInformation}{The object originally created by
+\code{\link{beginPipelineRun}}.}
 
-\item{modelLabel}{A string that will act as a label for this function call. The label will be used as a prefix for the saved object filenames in this function call.}
+\item{modelLabel}{A string that will act as a label for this function call.
+The label will be used as a prefix for the saved object filenames in this
+function call.}
 }
 \value{
 Object containing model metrics.
 }
 \description{
-Given model predictions and labels, calculates binary classification performance metrics
+Given model predictions and labels, calculates binary classification
+performance metrics
 }

@@ -1,0 +1,32 @@
+on:
+  push:
+  pull_request:
+
+name: "Lint-package"
+jobs:
+  lint-package:
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          use-public-rspm: true
+      - uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          extra-packages: | 
+            any::styler
+            any::roxygen2
+      - name: Lint package
+        run: styler::style_pkg()
+        shell: Rscript {0}
+      - name: Commit and push changes
+        run: |
+          if [[ `git status --porcelain` ]]; then
+           git config user.name 'github-actions[bot]'
+           git config user.email 'github-actions[bot]@users.noreply.github.com'
+           git add -A
+           git commit -m "Lint package"
+           git push
+          fi

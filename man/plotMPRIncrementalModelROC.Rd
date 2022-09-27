@@ -9,9 +9,6 @@ plotMPRIncrementalModelROC(incrementalModelResult)
 \arguments{
 \item{incrementalModelResult}{}
 }
-\value{
-
-}
 \description{
 Title
 }

@@ -16,18 +16,33 @@ fitCoxPH(
 \arguments{
 \item{modelPredictions}{A vector of model predictions.}
 
-\item{targetTable}{A matrix/data.frame with columns named 'Event' and 'time_to_event'. 'Event' should correspond to a binary label. 'time_to_event' should correspond to a positive numerical value representing the survival time (when Event == 1) or the time-to-censoring (when Event == 0)}
+\item{targetTable}{A matrix/data.frame with columns named 'Event' and
+'time_to_event'. 'Event' should correspond to a binary label.
+'time_to_event' should correspond to a positive numerical value
+representing the survival time (when Event == 1) or the time-to-censoring
+(when Event == 0)}
 
-\item{covariatesTable}{A table that includes columns corresponding to covariates to be included in the model.}
+\item{covariatesTable}{A table that includes columns corresponding to
+covariates to be included in the model.}
 
-\item{covariateColnames}{A named list with names corresponding to the covariate column names to be used in the model. The values in the list should correspond to the actual column name in covariatesTable}
+\item{covariateColnames}{A named list with names corresponding to the
+covariate column names to be used in the model. The values in the list
+should correspond to the actual column name in \code{covariatesTable}}
 
-\item{pipelineRunInformation}{The object originally created by beginPipelineRun.}
+\item{pipelineRunInformation}{The object originally created by
+\code{\link{beginPipelineRun}}.}
 
-\item{modelLabel}{A string that will act as a label for this function call. The label will be used as a prefix for the saved object filenames in this function call.}
+\item{modelLabel}{A string that will act as a label for this function call.
+The label will be used as a prefix for the saved object filenames in this
+function call.}
 }
 \value{
-A named list consisting of the following elements: 'coxPHModel' is the fit coxph model object (from the survival library). 'coxPHModelSummary' is the result from calling summary() on coxPHModel. 'pseudoR2' is the pseudo r-squared value for the model. 'hazardRatio' is the hazard ratio for the predictor variable.
+A named list consisting of the following elements:
+  \code{'coxPHModel'} is the fit coxph model object (from the \code{survival}
+  library). \code{'coxPHModelSummary'} is the result from calling
+  \code{summary()} on \code{coxPHModel}. \code{'pseudoR2'} is the pseudo
+  r-squared value for the model. \code{'hazardRatio'} is the hazard ratio for
+  the predictor variable.
 }
 \description{
 Fit coxph model with a predictor variable and a set of covariates.
