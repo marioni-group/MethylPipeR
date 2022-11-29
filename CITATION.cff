@@ -1,0 +1,416 @@
+# -----------------------------------------------------------
+# CITATION file created with {cffr} R package, v0.2.3
+# See also: https://docs.ropensci.org/cffr/
+# -----------------------------------------------------------
+ 
+cff-version: 1.2.0
+message: 'To cite package "MethylPipeR" in publications use:'
+type: software
+title: 'MethylPipeR: MethylPipeR'
+version: 0.1.0
+abstract: Modular and reproducible machine learning prediction pipelines.
+authors:
+- family-names: Cheng
+  given-names: Yipeng
+  email: yipeng.cheng@ed.ac.uk
+preferred-citation:
+  type: manual
+  title: 'MethylPipeR: MethylPipeR'
+  authors:
+  - family-names: Cheng
+    given-names: Yipeng
+    email: yipeng.cheng@ed.ac.uk
+  version: 0.1.0
+  abstract: Modular and reproducible machine learning prediction pipelines.
+  contact:
+  - family-names: Cheng
+    given-names: Yipeng
+    email: yipeng.cheng@ed.ac.uk
+  year: '2022'
+contact:
+- family-names: Cheng
+  given-names: Yipeng
+  email: yipeng.cheng@ed.ac.uk
+references:
+- type: software
+  title: BART
+  abstract: 'BART: Bayesian Additive Regression Trees'
+  notes: Imports
+  authors:
+  - family-names: McCulloch
+    given-names: Robert
+  - family-names: Sparapani
+    given-names: Rodney
+    email: rsparapa@mcw.edu
+  - family-names: Spanbauer
+    given-names: Charles
+  - family-names: Gramacy
+    given-names: Robert
+  - family-names: Pratola
+    given-names: Matthew
+  year: '2022'
+  url: https://CRAN.R-project.org/package=BART
+- type: software
+  title: pROC
+  abstract: 'pROC: Display and Analyze ROC Curves'
+  notes: Imports
+  authors:
+  - family-names: Robin
+    given-names: Xavier
+    email: pROC-cran@xavier.robin.name
+    orcid: https://orcid.org/0000-0002-6813-3200
+  - family-names: Turck
+    given-names: Natacha
+  - family-names: Hainard
+    given-names: Alexandre
+  - family-names: Tiberti
+    given-names: Natalia
+  - family-names: Lisacek
+    given-names: Frédérique
+  - family-names: Sanchez
+    given-names: Jean-Charles
+  - family-names: Müller
+    given-names: Markus
+  year: '2022'
+  url: https://CRAN.R-project.org/package=pROC
+- type: software
+  title: glmnet
+  abstract: 'glmnet: Lasso and Elastic-Net Regularized Generalized Linear Models'
+  notes: Imports
+  authors:
+  - family-names: Friedman
+    given-names: Jerome
+  - family-names: Hastie
+    given-names: Trevor
+    email: hastie@stanford.edu
+  - family-names: Tibshirani
+    given-names: Rob
+  - family-names: Narasimhan
+    given-names: Balasubramanian
+  - family-names: Tay
+    given-names: Kenneth
+  - family-names: Simon
+    given-names: Noah
+  - family-names: Yang
+    given-names: James
+  year: '2022'
+  url: https://CRAN.R-project.org/package=glmnet
+- type: software
+  title: doParallel
+  abstract: 'doParallel: Foreach Parallel Adaptor for the ''parallel'' Package'
+  notes: Imports
+  authors:
+  - family-names: Corporation
+    given-names: Microsoft
+  - family-names: Weston
+    given-names: Steve
+  year: '2022'
+  url: https://CRAN.R-project.org/package=doParallel
+- type: software
+  title: tictoc
+  abstract: 'tictoc: Functions for Timing R Scripts, as Well as Implementations of
+    "Stack" and "List" Structures'
+  notes: Imports
+  authors:
+  - family-names: Izrailev
+    given-names: Sergei
+  year: '2022'
+  url: https://CRAN.R-project.org/package=tictoc
+- type: software
+  title: caret
+  abstract: 'caret: Classification and Regression Training'
+  notes: Imports
+  authors:
+  - family-names: Kuhn
+    given-names: Max
+    email: mxkuhn@gmail.com
+    orcid: https://orcid.org/0000-0003-2402-136X
+  year: '2022'
+  url: https://CRAN.R-project.org/package=caret
+- type: software
+  title: survival
+  abstract: 'survival: Survival Analysis'
+  notes: Imports
+  authors:
+  - family-names: Therneau
+    given-names: Terry M
+    email: therneau.terry@mayo.edu
+  year: '2022'
+  url: https://CRAN.R-project.org/package=survival
+- type: software
+  title: ggplot2
+  abstract: 'ggplot2: Create Elegant Data Visualisations Using the Grammar of Graphics'
+  notes: Imports
+  authors:
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@rstudio.com
+    orcid: https://orcid.org/0000-0003-4757-117X
+  - family-names: Chang
+    given-names: Winston
+    orcid: https://orcid.org/0000-0002-1576-2126
+  - family-names: Henry
+    given-names: Lionel
+  - family-names: Pedersen
+    given-names: Thomas Lin
+    email: thomas.pedersen@rstudio.com
+    orcid: https://orcid.org/0000-0002-5147-4711
+  - family-names: Takahashi
+    given-names: Kohske
+  - family-names: Wilke
+    given-names: Claus
+    orcid: https://orcid.org/0000-0002-7470-9261
+  - family-names: Woo
+    given-names: Kara
+    orcid: https://orcid.org/0000-0002-5125-4188
+  - family-names: Yutani
+    given-names: Hiroaki
+    orcid: https://orcid.org/0000-0002-3385-7233
+  - family-names: Dunnington
+    given-names: Dewey
+    orcid: https://orcid.org/0000-0002-9415-4582
+  year: '2022'
+  url: https://CRAN.R-project.org/package=ggplot2
+- type: software
+  title: dplyr
+  abstract: 'dplyr: A Grammar of Data Manipulation'
+  notes: Imports
+  authors:
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@rstudio.com
+    orcid: https://orcid.org/0000-0003-4757-117X
+  - family-names: François
+    given-names: Romain
+    orcid: https://orcid.org/0000-0002-2444-4226
+  - family-names: Henry
+    given-names: Lionel
+  - family-names: Müller
+    given-names: Kirill
+    orcid: https://orcid.org/0000-0002-1416-3412
+  year: '2022'
+  url: https://CRAN.R-project.org/package=dplyr
+- type: software
+  title: ROCR
+  abstract: 'ROCR: Visualizing the Performance of Scoring Classifiers'
+  notes: Imports
+  authors:
+  - family-names: Sing
+    given-names: Tobias
+    email: tobias.sing@gmail.com
+  - family-names: Sander
+    given-names: Oliver
+    email: osander@gmail.com
+  - family-names: Beerenwinkel
+    given-names: Niko
+  - family-names: Lengauer
+    given-names: Thomas
+  year: '2022'
+  url: https://CRAN.R-project.org/package=ROCR
+- type: software
+  title: RColorBrewer
+  abstract: 'RColorBrewer: ColorBrewer Palettes'
+  notes: Imports
+  authors:
+  - family-names: Neuwirth
+    given-names: Erich
+    email: erich.neuwirth@univie.ac.at
+  year: '2022'
+  url: https://CRAN.R-project.org/package=RColorBrewer
+- type: software
+  title: stats
+  abstract: 'R: A Language and Environment for Statistical Computing'
+  notes: Imports
+  authors:
+  - name: R Core Team
+  location:
+    name: Vienna, Austria
+  year: '2022'
+  url: https://www.R-project.org/
+  institution:
+    name: R Foundation for Statistical Computing
+- type: software
+  title: MLmetrics
+  abstract: 'MLmetrics: Machine Learning Evaluation Metrics'
+  notes: Imports
+  authors:
+  - family-names: Yan
+    given-names: Yachen
+    email: yanyachen21@gmail.com
+  year: '2022'
+  url: https://CRAN.R-project.org/package=MLmetrics
+- type: software
+  title: randomForest
+  abstract: 'randomForest: Breiman and Cutler''s Random Forests for Classification
+    and Regression'
+  notes: Imports
+  authors:
+  - family-names: Breiman
+    given-names: Fortran original by Leo
+  - family-names: Cutler
+    given-names: Adele
+  - family-names: Liaw
+    given-names: R port by Andy
+  - family-names: Wiener.
+    given-names: Matthew
+  year: '2022'
+  url: https://CRAN.R-project.org/package=randomForest
+- type: software
+  title: randomForestSRC
+  abstract: 'randomForestSRC: Fast Unified Random Forests for Survival, Regression,
+    and Classification (RF-SRC)'
+  notes: Imports
+  authors:
+  - family-names: Ishwaran
+    given-names: Hemant
+    email: hemant.ishwaran@gmail.com
+  - family-names: Kogalur
+    given-names: Udaya B.
+    email: ubk@kogalur.com
+  year: '2022'
+  url: https://CRAN.R-project.org/package=randomForestSRC
+- type: software
+  title: e1071
+  abstract: 'e1071: Misc Functions of the Department of Statistics, Probability Theory
+    Group (Formerly: E1071), TU Wien'
+  notes: Imports
+  authors:
+  - family-names: Meyer
+    given-names: David
+    email: David.Meyer@R-project.org
+  - family-names: Dimitriadou
+    given-names: Evgenia
+  - family-names: Hornik
+    given-names: Kurt
+  - family-names: Weingessel
+    given-names: Andreas
+  - family-names: Leisch
+    given-names: Friedrich
+  year: '2022'
+  url: https://CRAN.R-project.org/package=e1071
+- type: software
+  title: performance
+  abstract: 'performance: Assessment of Regression Models Performance'
+  notes: Imports
+  authors:
+  - family-names: Lüdecke
+    given-names: Daniel
+    email: d.luedecke@uke.de
+    orcid: https://orcid.org/0000-0002-8895-3206
+  - family-names: Makowski
+    given-names: Dominique
+    email: dom.makowski@gmail.com
+    orcid: https://orcid.org/0000-0001-5375-9967
+  - family-names: Ben-Shachar
+    given-names: Mattan S.
+    email: matanshm@post.bgu.ac.il
+    orcid: https://orcid.org/0000-0002-4287-4801
+  - family-names: Patil
+    given-names: Indrajeet
+    email: patilindrajeet.science@gmail.com
+    orcid: https://orcid.org/0000-0003-1995-6531
+  - family-names: Waggoner
+    given-names: Philip
+    email: philip.waggoner@gmail.com
+    orcid: https://orcid.org/0000-0002-7825-7573
+  - family-names: Wiernik
+    given-names: Brenton M.
+    email: brenton@wiernik.org
+    orcid: https://orcid.org/0000-0001-9560-6336
+  year: '2022'
+  url: https://CRAN.R-project.org/package=performance
+- type: software
+  title: see
+  abstract: 'see: Model Visualisation Toolbox for ''easystats'' and ''ggplot2'''
+  notes: Imports
+  authors:
+  - family-names: Lüdecke
+    given-names: Daniel
+    email: d.luedecke@uke.de
+    orcid: https://orcid.org/0000-0002-8895-3206
+  - family-names: Makowski
+    given-names: Dominique
+    email: dom.makowski@gmail.com
+    orcid: https://orcid.org/0000-0001-5375-9967
+  - family-names: Patil
+    given-names: Indrajeet
+    email: patilindrajeet.science@gmail.com
+    orcid: https://orcid.org/0000-0003-1995-6531
+  - family-names: Ben-Shachar
+    given-names: Mattan S.
+    email: matanshm@post.bgu.ac.il
+    orcid: https://orcid.org/0000-0002-4287-4801
+  - family-names: Wiernik
+    given-names: Brenton M.
+    email: brenton@wiernik.org
+    orcid: https://orcid.org/0000-0001-9560-6336
+  - family-names: Waggoner
+    given-names: Philip
+    email: philip.waggoner@gmail.com
+    orcid: https://orcid.org/0000-0002-7825-7573
+  year: '2022'
+  url: https://CRAN.R-project.org/package=see
+- type: software
+  title: biglasso
+  abstract: 'biglasso: Extending Lasso Model Fitting to Big Data'
+  notes: Imports
+  authors:
+  - family-names: Zeng
+    given-names: Yaohui
+  - family-names: Wang
+    given-names: Chuyi
+  - family-names: Breheny
+    given-names: Patrick
+  year: '2022'
+  url: https://CRAN.R-project.org/package=biglasso
+- type: software
+  title: bigmemory
+  abstract: 'bigmemory: Manage Massive Matrices with Shared Memory and Memory-Mapped
+    Files'
+  notes: Imports
+  authors:
+  - family-names: Kane
+    given-names: Michael J.
+    email: kaneplusplus@gmail.com
+  - family-names: Emerson
+    given-names: John W.
+    email: jayemerson@gmail.com
+  - family-names: Haverty
+    given-names: Peter
+    email: haverty.peter@gene.com
+  - family-names: Determan Jr.
+    given-names: Charles
+    email: cdetermanjr@gmail.com
+  year: '2022'
+  url: http://www.bigmemory.org
+- type: software
+  title: bigmemoryExt
+  abstract: 'bigmemoryExt: Bigmemory Extensions'
+  notes: Imports
+  authors:
+  - family-names: Determan Jr.
+    given-names: Charles
+  year: '2022'
+- type: software
+  title: methods
+  abstract: 'R: A Language and Environment for Statistical Computing'
+  notes: Imports
+  authors:
+  - name: R Core Team
+  location:
+    name: Vienna, Austria
+  year: '2022'
+  url: https://www.R-project.org/
+  institution:
+    name: R Foundation for Statistical Computing
+- type: software
+  title: testthat
+  abstract: 'testthat: Unit Testing for R'
+  notes: Suggests
+  authors:
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@rstudio.com
+  year: '2022'
+  url: https://CRAN.R-project.org/package=testthat
+  version: '>= 3.0.0'

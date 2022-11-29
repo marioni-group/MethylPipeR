@@ -21,27 +21,42 @@ fitLogisticModel(
 )
 }
 \arguments{
-\item{xs}{A matrix/data.frame corresponding to X variables. Columns should correspond to features.}
+\item{xs}{A matrix/data.frame corresponding to X variables. Columns should
+correspond to features.}
 
-\item{y}{A matrix/data.frame with a column named 'Event' corresponding to a binary label.}
+\item{y}{A matrix/data.frame with a column named 'Event' corresponding to a
+binary label.}
 
-\item{penalty}{'lasso'/'elnet'/'ridge' A string specifying the penalty.}
+\item{penalty}{\code{'lasso'}/\code{'elnet'}/\code{'ridge'} A string
+specifying the penalty.}
 
-\item{weights}{A vector of weights corresponding to the training data rows to be used in model fitting.}
+\item{weights}{A vector of weights corresponding to the training data rows to
+be used in model fitting.}
 
-\item{nFoldsCV}{The number of folds to be used in cross-validation (default is 3)}
+\item{nFoldsCV}{The number of folds to be used in cross-validation (default
+is 3)}
 
-\item{foldID}{A vector of numbers specifying a cross-validation fold. Each entry should correspond to a row in xs.}
+\item{foldID}{A vector of numbers specifying a cross-validation fold. Each
+entry should correspond to a row in \code{xs}.}
 
-\item{pipelineRunInformation}{The object originally created by begin.pipeline.run}
+\item{pipelineRunInformation}{The object originally created by
+\code{\link{beginPipelineRun}}}
 
-\item{modelLabel}{A string that will act as a label for this function call. The label will be used as a prefix in the 'penalty' and 'number of folds' entries in pipeline.run.information. It will also be used as a prefix for the saved object filenames in this function call.}
+\item{modelLabel}{A string that will act as a label for this function call.
+The label will be used as a prefix in the 'penalty' and 'number of folds'
+entries in pipeline.run.information. It will also be used as a prefix for
+the saved object filenames in this function call.}
 
-\item{prescaled}{A boolean specifying if the columns in xs have been scaled before the call to fitLogisticModel e.g. using scale(). If set to TRUE, this sets standardize = FALSE in the internal call to cv.glmnet}
+\item{prescaled}{A boolean specifying if the columns in \code{xs} have been
+scaled before the call to fitLogisticModel e.g. using \code{scale()}. If
+set to TRUE, this sets \code{standardize = FALSE} in the internal call to
+\code{cv.glmnet}}
 
-\item{typeMeasure}{A string specifying the argument to type.measure in cv.glmnet. Defaults to 'default'.}
+\item{typeMeasure}{A string specifying the argument to type.measure in
+\code{cv.glmnet}. Defaults to \code{'default'}.}
 
-\item{penaltyFactor}{A vector of numbers indicating variable-specific weights for the lambda penalty.}
+\item{penaltyFactor}{A vector of numbers indicating variable-specific weights
+for the lambda penalty.}
 }
 \value{
 The glmnet logistic model object.

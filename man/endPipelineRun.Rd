@@ -4,15 +4,18 @@
 \alias{endPipelineRun}
 \title{This function is for an older version of MethylPipeR and is now deprecated.
 It is currently still included to allow old scripts to run correctly.
-To be called at the end of a pipeline run. Saves the pipelineRunInformation to a file. Saves the pipeline timing logs to a file.}
+To be called at the end of a pipeline run. Saves the pipelineRunInformation 
+to a file. Saves the pipeline timing logs to a file.}
 \usage{
 endPipelineRun(pipelineRunInformation)
 }
 \arguments{
-\item{pipelineRunInformation}{The list of pipeline run information entries (originally output by beginPipelineRun).}
+\item{pipelineRunInformation}{The list of pipeline run information entries
+(originally output by \code{beginPipelineRun}).}
 }
 \description{
 This function is for an older version of MethylPipeR and is now deprecated.
 It is currently still included to allow old scripts to run correctly.
-To be called at the end of a pipeline run. Saves the pipelineRunInformation to a file. Saves the pipeline timing logs to a file.
+To be called at the end of a pipeline run. Saves the pipelineRunInformation 
+to a file. Saves the pipeline timing logs to a file.
 }

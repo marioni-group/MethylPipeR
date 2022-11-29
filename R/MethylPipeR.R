@@ -25,4 +25,4 @@
 #' @importFrom methods S3Class
 #' @import e1071
 #' @import see
-NULL
+utils::globalVariables(c("Event", "plotPRBaseline", "time_to_event"))

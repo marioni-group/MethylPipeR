@@ -7,7 +7,8 @@
 loadData(dataFilepath)
 }
 \arguments{
-\item{dataFilepath}{The filepath of the data to be loaded. Currently supports '.rds' and '.csv' endings}
+\item{dataFilepath}{The filepath of the data to be loaded. Currently supports
+'.rds' and '.csv' endings}
 }
 \value{
 The loaded data object

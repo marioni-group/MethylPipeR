@@ -7,22 +7,7 @@
 rfCVGridSearch(xs, y, nFolds, foldIDs = NULL, metric = NULL, seed = NULL, ...)
 }
 \arguments{
-\item{xs}{}
-
-\item{y}{}
-
-\item{nFolds}{}
-
-\item{foldIDs}{}
-
-\item{metric}{}
-
-\item{seed}{}
-
 \item{...}{}
-}
-\value{
-
 }
 \description{
 Title

@@ -18,15 +18,22 @@ fitBARTSurvival(
 )
 }
 \arguments{
-\item{trainXs}{A matrix/data.frame of X variables to be used in the model fitting. Columns should correspond to variables.}
+\item{trainXs}{A matrix/data.frame of X variables to be used in the model
+fitting. Columns should correspond to variables.}
 
-\item{trainTarget}{A matrix/data.frame including columns named 'Event' and 'time_to_event' corresponding to a binary indicator of event/censoring and the time to event/censoring respectively.}
+\item{trainTarget}{A matrix/data.frame including columns named 'Event' and
+'time_to_event' corresponding to a binary indicator of event/censoring and
+the time to event/censoring respectively.}
 
-\item{testXs}{A matrix/data.frame of out-of-sample data to be used in model evaluation. The set of variables should be the same as those in trainXs.}
+\item{testXs}{A matrix/data.frame of out-of-sample data to be used in model
+evaluation. The set of variables should be the same as those in
+\code{trainXs}.}
 
-\item{pipelineRunInformation}{The object originally created by begin.pipeline.run.}
+\item{pipelineRunInformation}{The object originally created by
+\code{\link{beginPipelineRun}}.}
 
-\item{sparse}{Set to TRUE if the sparsity inducing Dirichlet prior should be used for splitting rule variable selection.}
+\item{sparse}{Set to \code{TRUE} if the sparsity inducing Dirichlet prior
+should be used for splitting rule variable selection.}
 
 \item{mcCores}{The number of cores to be used by the MCMC sampler.}
 
@@ -34,12 +41,14 @@ fitBARTSurvival(
 
 \item{k}{The value of the hyperparameter k.}
 
-\item{nSkip}{The number of MCMC samples that should be treated as burn-in and discarded.}
+\item{nSkip}{The number of MCMC samples that should be treated as burn-in and
+discarded.}
 
-\item{type}{'pbart' (probit) or 'lbart' (logit)}
+\item{type}{\code{'pbart'} (probit) or \code{'lbart'} (logit)}
 }
 \value{
-The fit BART survival model object of type survbart.
+The fit BART survival model object of type
+  \code{\link[BART]{surv.bart}}.
 }
 \description{
 fitBARTSurvival

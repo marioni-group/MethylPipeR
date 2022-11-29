@@ -21,31 +21,45 @@ fitMPRModel(
 )
 }
 \arguments{
-\item{type}{A string representing the type of model. Can be 'binary', 'survival' or 'continuous'.}
+\item{type}{A string representing the type of model. Can be \code{'binary'},
+\code{'survival'} or \code{'continuous'}.}
 
-\item{method}{The modelling method. Currently supports 'glmnet', 'bart' and 'rf'.}
+\item{method}{The modelling method. Currently supports \code{'glmnet'},
+\code{'bart'} and \code{'rf'}.}
 
 \item{trainXs}{The training data matrix/data.frame.}
 
-\item{trainY}{The training response variable. This should be a vector if type = 'binary'/'continuous' or a data.frame/matrix with column names corresponding to tteColname and eventColname if type = 'survival'.}
+\item{trainY}{The training response variable. This should be a vector if
+\code{type = 'binary'}/\code{'continuous'} or a data.frame/matrix with
+column names corresponding to \code{tteColname} and \code{eventColname} if
+\code{type = 'survival'}.}
 
 \item{testXs}{The test data matrix/data.frame.}
 
-\item{testY}{The test response variable. This should be a vector if type = 'binary'/'continuous' or a data.frame/matrix with column names corresponding to tteColname and eventColname if type = 'survival'.}
+\item{testY}{The test response variable. This should be a vector if
+\code{type = 'binary'}/\code{'continuous'} or a data.frame/matrix with
+column names corresponding to \code{tteColname} and \code{eventColname} if
+\code{type = 'survival'}.}
 
-\item{tteColname}{A string corresponding to the time-to-event column name in trainY/testY. Only required if type == 'survival'.}
+\item{tteColname}{A string corresponding to the time-to-event column name in
+\code{trainY}/\code{testY}. Only required if \code{type == 'survival'}.}
 
-\item{eventColname}{A string corresponding to the event column name in trainY/testY. Only required if type == 'survival'.}
+\item{eventColname}{A string corresponding to the event column name in
+\code{trainY}/\code{testY}. Only required if \code{type == 'survival'}.}
 
-\item{parallel}{A boolean specifying whether parallel computation should be used in model fitting.}
+\item{parallel}{A boolean specifying whether parallel computation should be
+used in model fitting.}
 
 \item{seed}{An integer to set the random seed to for model fitting.}
 
-\item{save}{A boolean specifying if the model object should be saved to the logs.}
+\item{save}{A boolean specifying if the model object should be saved to the
+logs.}
 
-\item{saveSuffix}{Optional - a custom suffix to include in the filename of the saved model object after the timestamp.}
+\item{saveSuffix}{Optional - a custom suffix to include in the file name of
+the saved model object after the timestamp.}
 
-\item{...}{Other arguments to be passed to the method-specific fitting function.}
+\item{...}{Other arguments to be passed to the method-specific fitting
+function.}
 }
 \value{
 A MPRModel object with the fitted model.

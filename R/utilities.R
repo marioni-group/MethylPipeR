@@ -1,7 +1,9 @@
 checkNA <- function(x, stop = TRUE) {
   containsNAs <- any(is.na(x))
   if (containsNAs & stop) {
-    stop(paste0('Input object of class ', class(x), ' contains NAs which are not handled by the function.'))
+    stop(paste0("Input object of class ",
+                class(x),
+                " contains NAs which are not handled by the function."))
   } else {
     containsNAs
   }
@@ -9,7 +11,7 @@ checkNA <- function(x, stop = TRUE) {
 
 checkMatrixOrDF <- function(x) {
   if (!(is.matrix(x) | is.data.frame(x) | is.big.matrix(x))) {
-    stop('Input should be a matrix or data.frame!')
+    stop("Input should be a matrix or data.frame!\n")
   }
 }
 
@@ -18,15 +20,15 @@ checkMatrixOrDF <- function(x) {
 #     set.seed(seed)
 #   }
 #   trainingSetIndexes <- groupKFold(df[, groupColname], k = nFolds)
-#   
+#
 #   if (length(trainingSetIndexes) < nFolds) {
-#     stop('Error: number of folds returned in getGroupCVFoldIDs is less than k. 
+#     stop('Error: number of folds returned in getGroupCVFoldIDs is less than k.
 #          This can sometimes occur due to the implementation of caret::groupKFold.
 #          Try running getGroupCVFoldIDs with a different seed.')
 #   }
-#   
+#
 #   foldIDs <- integer(nrow(df))
-#   
+#
 #   # groupKFold returns a list of training set indexes. Therefore to identify the
 #   # rows that should have foldIDs == i, we find the indexes that are not present
 #   # in trainingSetIndexes[[i]]
@@ -35,8 +37,8 @@ checkMatrixOrDF <- function(x) {
 #     print(foldIndex)
 #     foldIDs[foldIndex] <- i
 #   }
-#   
-# 
+#
+#
 #   foldIDs
 # }
 
@@ -56,16 +58,16 @@ getGroupCVFoldIDs <- function(groups, nFolds, seed = NULL) {
   if (!is.null(seed)) {
     set.seed(seed)
   }
-  
+
   counts <- table(groups)
   elementsPerFold <- length(groups) / nFolds
-  
+
   usedGroups <- character()
   currentFoldNumber <- 1
   groupToFoldMap <- list()
   foldToNElementsMap <- list()
   currentFoldNElements <- 0
-  
+
   for (i in seq(length(counts))) {
     remainingGroups <- setdiff(names(counts), usedGroups)
     sampledGroup <- sample(remainingGroups, size = 1)
@@ -84,7 +86,9 @@ getGroupCVFoldIDs <- function(groups, nFolds, seed = NULL) {
     groupToFoldMap[[as.character(x)]]
   })
   
-  list(foldIDs = foldIDs, groupToFoldMap = groupToFoldMap, foldToNElementsMap = foldToNElementsMap)
+  list(foldIDs = foldIDs, 
+       groupToFoldMap = groupToFoldMap, 
+       foldToNElementsMap = foldToNElementsMap)
 }
 
 

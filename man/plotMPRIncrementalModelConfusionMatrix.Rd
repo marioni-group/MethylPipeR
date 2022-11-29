@@ -11,14 +11,7 @@ plotMPRIncrementalModelConfusionMatrix(
 )
 }
 \arguments{
-\item{nullModelResponse}{}
-
-\item{fullModelResponse}{}
-
 \item{target}{}
-}
-\value{
-
 }
 \description{
 Title

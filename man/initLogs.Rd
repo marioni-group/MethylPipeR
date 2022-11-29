@@ -2,18 +2,19 @@
 % Please edit documentation in R/logging.R
 \name{initLogs}
 \alias{initLogs}
-\title{To be called at the beginning of a MethylPipeR session. Initialises logging and model saving functionality.}
+\title{To be called at the beginning of a MethylPipeR session. Initialises logging
+and model saving functionality.}
 \usage{
 initLogs(sessionLogFolder, note = "MethylPipeR pipeline run (no note given).")
 }
 \arguments{
-\item{sessionLogFolder}{The path of the folder that logs and model objects should be saved to. Must end in "/".}
+\item{sessionLogFolder}{The path of the folder that logs and model objects
+should be saved to. Must end in "/".}
 
-\item{note}{A note which will be saved at the top of the session log - can help to identify a specific pipeline run when checking the pipeline logs.}
-}
-\value{
-
+\item{note}{A note which will be saved at the top of the session log - can
+help to identify a specific pipeline run when checking the pipeline logs.}
 }
 \description{
-To be called at the beginning of a MethylPipeR session. Initialises logging and model saving functionality.
+To be called at the beginning of a MethylPipeR session. Initialises logging
+and model saving functionality.
 }

@@ -1,7 +1,7 @@
-initLogs(sessionLogFolder = 'C:/Users/s2092119/Documents/PhD/Omics Prediction of Incident Disease/R Package/MethylPipeR-UI_logs/')
-sessionLogContents <- readLines(file(getOption('mprSessionLogFilepath')))[[1]]
+initLogs(sessionLogFolder = "C:/Users/s2092119/Documents/PhD/Omics Prediction of Incident Disease/R Package/MethylPipeR-UI_logs/")
+sessionLogContents <- readLines(file(getOption("mprSessionLogFilepath")))[[1]]
 # This test needs fixing to correctly form the expected line(s).
-# expect_equal(sessionLogContents, paste0('Starting MethylPipeR session. Timestamp: ', getOption('mprSessionStartTimestamp')))
+# expect_equal(sessionLogContents, paste0("Starting MethylPipeR session. Timestamp: ", getOption("mprSessionStartTimestamp")))
 
-logSessionLines('Test line 1', 'Test line 2')
+logSessionLines("Test line 1", "Test line 2")
 # TODO: implement test to check written lines

@@ -1,0 +1,5 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+^CITATION\.cff$
+^.github
+^codemeta\.json$

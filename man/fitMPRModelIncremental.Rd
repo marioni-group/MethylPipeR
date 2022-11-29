@@ -13,7 +13,8 @@ fitMPRModelIncremental(
 )
 }
 \arguments{
-\item{X}{A data.frame containing columns corresponding to yColname, covColnames and scoreColname.}
+\item{X}{A data.frame containing columns corresponding to \code{yColname},
+\code{covColnames} and \code{scoreColname}.}
 
 \item{yColname}{The name of the column representing the response variable.}
 
@@ -21,10 +22,13 @@ fitMPRModelIncremental(
 
 \item{scoreColname}{The name of the score column.}
 
-\item{family}{The glm family string. 'binomial' for binary response. 'gaussian' for continuous response.}
+\item{family}{The GLM family string. \code{'binomial'} for binary response.
+\code{'gaussian'} for continuous response.}
 }
 \value{
-A list containing results for the null (covariates only) model and full model (score and covariates). For each model, the formula, response and glm model object are provided.
+A list containing results for the null (covariates only) model and
+  full model (score and covariates). For each model, the formula, response
+  and \code{\link[stats]{glm}} model object are provided.
 }
 \description{
 fitMPRModelIncremental

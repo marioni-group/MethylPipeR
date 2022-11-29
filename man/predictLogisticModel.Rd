@@ -17,13 +17,18 @@ predictLogisticModel(
 \arguments{
 \item{model}{A glmnet logistic regression model.}
 
-\item{xs}{A matrix/data.frame corresponding to X variables. Columns should correspond to features.}
+\item{xs}{A matrix/data.frame corresponding to X variables. Columns should
+correspond to features.}
 
-\item{pipelineRunInformation}{The object originally created by begin.pipeline.run.}
+\item{pipelineRunInformation}{The object originally created by
+\code{\link{beginPipelineRun}}}
 
-\item{modelLabel}{A string that will act as a label for this function call. The label will be used as a prefix for the saved object filenames in this function call.}
+\item{modelLabel}{A string that will act as a label for this function call.
+The label will be used as a prefix for the saved object file names in this
+function call.}
 
-\item{predictType}{A string specifying the prediction type ('class' or 'response').}
+\item{predictType}{A string specifying the prediction type (\code{'class'} or
+\code{'response'}).}
 }
 \value{
 A vector of model predictions.

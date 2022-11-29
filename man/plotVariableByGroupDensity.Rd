@@ -16,11 +16,13 @@ plotVariableByGroupDensity(
 )
 }
 \arguments{
-\item{plotData}{data.frame containing variables to be plotted (at least two column titled <plotVariable> and <groupVariable>)}
+\item{plotData}{data.frame containing variables to be plotted (at least two
+column titled <plotVariable> and <groupVariable>)}
 
 \item{plotVariable}{The name of the variable to be plotted}
 
-\item{groupVariable}{The name of the variable representing the individual groups to be plotted}
+\item{groupVariable}{The name of the variable representing the individual
+groups to be plotted}
 
 \item{title}{The title of the plot}
 
@@ -28,9 +30,10 @@ plotVariableByGroupDensity(
 
 \item{yLabel}{The y axis label}
 
-\item{pipelineRunInformation}{the object originally returned by beginPipelineRun}
+\item{pipelineRunInformation}{the object originally returned by
+\code{beginPipelineRun}}
 
-\item{filenamePrefix}{The prefix for the filename of the saved plot object}
+\item{filenamePrefix}{The prefix for the file name of the saved plot object}
 }
 \value{
 The ggplot object for the created grouped density plot

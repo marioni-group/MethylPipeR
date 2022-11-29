@@ -7,11 +7,13 @@
 predictMPRModel(model, data, ...)
 }
 \arguments{
-\item{model}{An MPRModel object. This is typically returned from a call to fitMPRModel.}
+\item{model}{An \code{MPRModel} object. This is typically returned from a
+call to \code{\link{fitMPRModel}}.}
 
 \item{data}{The data.frame/matrix that the model will be applied to.}
 
-\item{...}{Other arguments to be passed to the method-specific prediction function.}
+\item{...}{Other arguments to be passed to the method-specific prediction
+function.}
 }
 \value{
 The result from the method-specific predict function.
