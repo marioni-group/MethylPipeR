@@ -85,8 +85,47 @@ getGroupCVFoldIDs <- function(groups, nFolds, seed = NULL) {
   foldIDs <- sapply(groups, function(x) {
     groupToFoldMap[[as.character(x)]]
   })
-
-  list(foldIDs = foldIDs,
-       groupToFoldMap = groupToFoldMap,
+  
+  list(foldIDs = foldIDs, 
+       groupToFoldMap = groupToFoldMap, 
        foldToNElementsMap = foldToNElementsMap)
+}
+
+
+#' For binary outcomes. Create a vector of (integer) fold assignments with equal numbers of cases (and controls) across folds.
+#' Used to ensure there are as many cases as possible in all folds, particularly in imbalanced datasets.
+#'
+#' @param data A dataframe containing a column specified by classColname
+#' @param classColname A string corresponding to the binary class label (must contain only integers: 1 and 0)
+#' @param nFolds The number of folds to assign
+#' @param seed An integer to set for the random seed
+#'
+#' @return A vector of integers specifying the fold ID assigned to each row in data
+#' @export
+getBalancedCVFoldIDs <- function(data, classColname, nFolds, seed = NULL) {
+  tic('Assigning balanced training folds')
+  # For cases and controls: shuffle indexes and assign an integer 1:nFolds on a round robin basis
+  if (!is.null(seed)) {
+    set.seed(seed)
+  }
+  
+  # Save original row names to reorder foldIDs at the end.
+  originalRowNames <- row.names(data)
+  
+  caseRowNames <- row.names(data[data[, classColname] == 1, ])
+  caseRowNames <- sample(caseRowNames)
+  caseFoldIDs <- 1:length(caseRowNames) %% nFolds + 1
+  names(caseFoldIDs) <- caseRowNames
+  
+  controlRowNames <- row.names(data[data[, classColname] == 0, ])
+  controlRowNames <- sample(controlRowNames)
+  controlFoldIDs <- 1:length(controlRowNames) %% nFolds + 1
+  names(controlFoldIDs) <- controlRowNames
+  
+  foldIDs <- c(caseFoldIDs, controlFoldIDs)
+  # Reorder according to original row names
+  foldIDs <- foldIDs[originalRowNames]
+  # foldids <- sapply(1:length(foldIDs), function(num) {foldIDs[[toString(num)]]})
+  toc(log = TRUE)
+  return(foldIDs)
 }

@@ -2,7 +2,9 @@
 % Please edit documentation in R/pipeline_modules.R
 \name{predictCoxModel}
 \alias{predictCoxModel}
-\title{Calculate linear model predictions using glmnet Cox model.}
+\title{This function is for an older version of MethylPipeR and is now deprecated.
+It is currently still included to allow old scripts to run correctly.
+Calculate linear model predictions using glmnet Cox model.}
 \usage{
 predictCoxModel(model, xs, pipelineRunInformation, modelLabel)
 }
@@ -20,5 +22,7 @@ function call.}
 A vector of model predictions.
 }
 \description{
+This function is for an older version of MethylPipeR and is now deprecated.
+It is currently still included to allow old scripts to run correctly.
 Calculate linear model predictions using glmnet Cox model.
 }

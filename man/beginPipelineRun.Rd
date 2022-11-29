@@ -2,7 +2,9 @@
 % Please edit documentation in R/pipeline_modules.R
 \name{beginPipelineRun}
 \alias{beginPipelineRun}
-\title{To be called at the beginning of a pipeline run.}
+\title{This function is for an older version of MethylPipeR and is now deprecated.
+It is currently still included to allow old scripts to run correctly.
+To be called at the beginning of a pipeline run.}
 \usage{
 beginPipelineRun(note, randomSeed = 42, log = TRUE, logFolderPath)
 }
@@ -23,5 +25,7 @@ A list containing pipeline run information. Many of the pipeline
 functions require this list to be passed in as an argument.
 }
 \description{
+This function is for an older version of MethylPipeR and is now deprecated.
+It is currently still included to allow old scripts to run correctly.
 To be called at the beginning of a pipeline run.
 }

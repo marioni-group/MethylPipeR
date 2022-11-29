@@ -2,7 +2,9 @@
 % Please edit documentation in R/pipeline_modules.R
 \name{calculateMetricsBinaryClassifier}
 \alias{calculateMetricsBinaryClassifier}
-\title{Given model predictions and labels, calculates binary classification
+\title{This function is for an older version of MethylPipeR and is now deprecated.
+It is currently still included to allow old scripts to run correctly.
+Given model predictions and labels, calculates binary classification 
 performance metrics}
 \usage{
 calculateMetricsBinaryClassifier(
@@ -29,6 +31,8 @@ function call.}
 Object containing model metrics.
 }
 \description{
+This function is for an older version of MethylPipeR and is now deprecated.
+It is currently still included to allow old scripts to run correctly.
 Given model predictions and labels, calculates binary classification
 performance metrics
 }

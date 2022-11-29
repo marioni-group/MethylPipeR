@@ -29,11 +29,9 @@ initSessionLogFile <- function(note) {
   sessionStartTimestamp <- getOption("mprSessionStartTimestamp")
   sessionLogFilepath <- getOption("mprSessionLogFilepath")
   sessionLogFile <- file(sessionLogFilepath)
-  writeLines(note, sessionLogFile)
-  writeLines(paste0("Starting MethylPipeR session. Timestamp: ",
-                    sessionStartTimestamp),
-             sessionLogFile)
+  # writeLines(list(paste0("Starting MethylPipeR session. Timestamp: ", sessionStartTimestamp), note), sessionLogFile)
   close(sessionLogFile)
+  logSessionLines(paste0("Starting MethylPipeR session. Timestamp: ", sessionStartTimestamp), note)
 }
 
 

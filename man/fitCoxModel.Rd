@@ -2,7 +2,9 @@
 % Please edit documentation in R/pipeline_modules.R
 \name{fitCoxModel}
 \alias{fitCoxModel}
-\title{Fit glmnet penalised cox model on training data.}
+\title{This function is for an older version of MethylPipeR and is now deprecated.
+It is currently still included to allow old scripts to run correctly.
+Fit glmnet penalised cox model on training data.}
 \usage{
 fitCoxModel(
   xs,
@@ -58,5 +60,7 @@ for the lambda penalty.}
 The fit penalised cox model glmnet object.
 }
 \description{
+This function is for an older version of MethylPipeR and is now deprecated.
+It is currently still included to allow old scripts to run correctly.
 Fit glmnet penalised cox model on training data.
 }
