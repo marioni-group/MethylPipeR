@@ -2,7 +2,9 @@
 % Please edit documentation in R/pipeline_modules.R
 \name{fitLogisticModel}
 \alias{fitLogisticModel}
-\title{Fits a penalised logistic regression model with cross-validation.}
+\title{This function is for an older version of MethylPipeR and is now deprecated.
+It is currently still included to allow old scripts to run correctly.
+Fits a penalised logistic regression model with cross-validation.}
 \usage{
 fitLogisticModel(
   xs,
@@ -45,5 +47,7 @@ fitLogisticModel(
 The glmnet logistic model object.
 }
 \description{
+This function is for an older version of MethylPipeR and is now deprecated.
+It is currently still included to allow old scripts to run correctly.
 Fits a penalised logistic regression model with cross-validation.
 }

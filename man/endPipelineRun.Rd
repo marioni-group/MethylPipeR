@@ -2,7 +2,9 @@
 % Please edit documentation in R/pipeline_modules.R
 \name{endPipelineRun}
 \alias{endPipelineRun}
-\title{To be called at the end of a pipeline run. Saves the pipelineRunInformation to a file. Saves the pipeline timing logs to a file.}
+\title{This function is for an older version of MethylPipeR and is now deprecated.
+It is currently still included to allow old scripts to run correctly.
+To be called at the end of a pipeline run. Saves the pipelineRunInformation to a file. Saves the pipeline timing logs to a file.}
 \usage{
 endPipelineRun(pipelineRunInformation)
 }
@@ -10,5 +12,7 @@ endPipelineRun(pipelineRunInformation)
 \item{pipelineRunInformation}{The list of pipeline run information entries (originally output by beginPipelineRun).}
 }
 \description{
+This function is for an older version of MethylPipeR and is now deprecated.
+It is currently still included to allow old scripts to run correctly.
 To be called at the end of a pipeline run. Saves the pipelineRunInformation to a file. Saves the pipeline timing logs to a file.
 }

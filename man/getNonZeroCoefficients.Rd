@@ -2,7 +2,9 @@
 % Please edit documentation in R/pipeline_modules.R
 \name{getNonZeroCoefficients}
 \alias{getNonZeroCoefficients}
-\title{Retrieve non-zero coefficients from a glmnet model}
+\title{This function is for an older version of MethylPipeR and is now deprecated.
+It is currently still included to allow old scripts to run correctly.
+Retrieve non-zero coefficients from a glmnet model}
 \usage{
 getNonZeroCoefficients(model, pipelineRunInformation, modelLabel)
 }
@@ -17,5 +19,7 @@ getNonZeroCoefficients(model, pipelineRunInformation, modelLabel)
 A data.frame containing the non-zero model coefficients.
 }
 \description{
+This function is for an older version of MethylPipeR and is now deprecated.
+It is currently still included to allow old scripts to run correctly.
 Retrieve non-zero coefficients from a glmnet model
 }

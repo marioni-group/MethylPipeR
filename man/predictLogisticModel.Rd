@@ -2,7 +2,9 @@
 % Please edit documentation in R/pipeline_modules.R
 \name{predictLogisticModel}
 \alias{predictLogisticModel}
-\title{Outputs predictions given a logistic model, data and labels.}
+\title{This function is for an older version of MethylPipeR and is now deprecated.
+It is currently still included to allow old scripts to run correctly.
+Outputs predictions given a logistic model, data and labels.}
 \usage{
 predictLogisticModel(
   model,
@@ -27,5 +29,7 @@ predictLogisticModel(
 A vector of model predictions.
 }
 \description{
+This function is for an older version of MethylPipeR and is now deprecated.
+It is currently still included to allow old scripts to run correctly.
 Outputs predictions given a logistic model, data and labels.
 }

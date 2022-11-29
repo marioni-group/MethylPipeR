@@ -1,4 +1,6 @@
 
+#' This function is for an older version of MethylPipeR and is now deprecated.
+#' It is currently still included to allow old scripts to run correctly.
 #' To be called at the beginning of a pipeline run.
 #'
 #' @param note A string describing the pipeline run. This will be saved in the pipeline run log.
@@ -8,6 +10,7 @@
 #' @return A list containing pipeline run information. Many of the pipeline functions require this list to be passed in as an argument.
 #' @export
 beginPipelineRun <- function(note, randomSeed = 42, log = TRUE, logFolderPath) {
+  .Deprecated()
   pipelineRunInformation <- list()
   pipelineRunInformation[['note']] <- note
   pipelineRunInformation[['log']] <- log
@@ -25,12 +28,14 @@ beginPipelineRun <- function(note, randomSeed = 42, log = TRUE, logFolderPath) {
   return(pipelineRunInformation)
 }
 
-
+#' This function is for an older version of MethylPipeR and is now deprecated.
+#' It is currently still included to allow old scripts to run correctly.
 #' To be called at the end of a pipeline run. Saves the pipelineRunInformation to a file. Saves the pipeline timing logs to a file.
 #'
 #' @param pipelineRunInformation The list of pipeline run information entries (originally output by beginPipelineRun).
 #' @export
 endPipelineRun <- function(pipelineRunInformation) {
+  .Deprecated()
   if (pipelineRunInformation[['log']]) {
     # Export pipeline run information list
     saveRDS(pipelineRunInformation, paste0(pipelineRunInformation[['log folder path']], 'pipeline_run_information_', pipelineRunInformation[['start timestamp']], '.rds'))
@@ -64,7 +69,8 @@ loadData <- function(dataFilepath) {
   return(loadedData)
 }
 
-
+#' This function is for an older version of MethylPipeR and is now deprecated.
+#' It is currently still included to allow old scripts to run correctly.
 #' Fits a penalised logistic regression model with cross-validation.
 #'
 #' @param xs A matrix/data.frame corresponding to X variables. Columns should correspond to features.
@@ -81,6 +87,7 @@ loadData <- function(dataFilepath) {
 #' @return The glmnet logistic model object.
 #' @export
 fitLogisticModel <- function(xs, y, penalty, weights, nFoldsCV = 3, foldID = NULL, pipelineRunInformation, modelLabel, prescaled = FALSE, typeMeasure = 'default', penaltyFactor = NULL) {
+  .Deprecated()
   tic('Fit logistic regression model')
   checkMatrixOrDF(xs)
   pipelineRunInformation[[paste0(modelLabel, ' penalty')]] <- penalty
@@ -105,7 +112,8 @@ fitLogisticModel <- function(xs, y, penalty, weights, nFoldsCV = 3, foldID = NUL
   return(model)
 }
 
-
+#' This function is for an older version of MethylPipeR and is now deprecated.
+#' It is currently still included to allow old scripts to run correctly.
 #' Outputs predictions given a logistic model, data and labels.
 #'
 #' @param model A glmnet logistic regression model.
@@ -116,6 +124,7 @@ fitLogisticModel <- function(xs, y, penalty, weights, nFoldsCV = 3, foldID = NUL
 #' @return A vector of model predictions.
 #' @export
 predictLogisticModel <- function(model, xs, pipelineRunInformation, modelLabel, predictType = 'class') {
+  .Deprecated()
   tic('Predict using fit logistic regression model')
   checkMatrixOrDF(xs)
   modelPredictions <- predictModelCVFunctions[['logistic']](model, xs, predictType)
@@ -130,7 +139,8 @@ predictLogisticModel <- function(model, xs, pipelineRunInformation, modelLabel, 
   return(modelPredictions)
 }
 
-
+#' This function is for an older version of MethylPipeR and is now deprecated.
+#' It is currently still included to allow old scripts to run correctly.
 #' Given model predictions and labels, calculates binary classification performance metrics
 #'
 #' @param modelPredictions A vector of model predictions.
@@ -140,6 +150,7 @@ predictLogisticModel <- function(model, xs, pipelineRunInformation, modelLabel, 
 #' @return Object containing model metrics.
 #' @export
 calculateMetricsBinaryClassifier <- function(modelPredictions, y, pipelineRunInformation, modelLabel) {
+  .Deprecated()
   tic('Calculate logistic regression model metrics')
   modelMetrics <- as.matrix(confusionMatrix(as.factor(modelPredictions), as.factor(y[, 'Event']), positive='1'), what = 'classes')
   pipelineRunInformation[[paste0(modelLabel, ' model metrics')]] <- modelMetrics
@@ -153,6 +164,8 @@ calculateMetricsBinaryClassifier <- function(modelPredictions, y, pipelineRunInf
   return(modelMetrics)
 }
 
+#' This function is for an older version of MethylPipeR and is now deprecated.
+#' It is currently still included to allow old scripts to run correctly.
 #' Fit glmnet penalised cox model on training data.
 #'
 #' @param xs A matrix/data.frame corresponding to X variables. Columns should correspond to features.
@@ -168,6 +181,7 @@ calculateMetricsBinaryClassifier <- function(modelPredictions, y, pipelineRunInf
 #' @return The fit penalised cox model glmnet object.
 #' @export
 fitCoxModel <- function(xs, target, penalty, weights, nFoldsCV = 3, foldID = FALSE, pipelineRunInformation, modelLabel, prescaled = FALSE, penaltyFactor = NULL) {
+  .Deprecated()
   tic(paste0('Fit Cox ', penalty, ' regression model. Label: ', modelLabel))
   checkMatrixOrDF(xs)
   pipelineRunInformation[[paste0(modelLabel, ' penalty')]] <- penalty
@@ -191,6 +205,8 @@ fitCoxModel <- function(xs, target, penalty, weights, nFoldsCV = 3, foldID = FAL
   return(model)
 }
 
+#' This function is for an older version of MethylPipeR and is now deprecated.
+#' It is currently still included to allow old scripts to run correctly.
 #' Calculate linear model predictions using glmnet Cox model.
 #'
 #' @param model A Cox glmnet model object.
@@ -200,6 +216,7 @@ fitCoxModel <- function(xs, target, penalty, weights, nFoldsCV = 3, foldID = FAL
 #' @return A vector of model predictions.
 #' @export
 predictCoxModel <- function(model, xs, pipelineRunInformation, modelLabel) {
+  .Deprecated()
   tic(paste0('Predict using Cox regression model. Label: ', modelLabel))
   checkMatrixOrDF(xs)
   modelPredictions <- predictModelCVFunctions[['cox']](model, xs)
@@ -212,6 +229,8 @@ predictCoxModel <- function(model, xs, pipelineRunInformation, modelLabel) {
   return(modelPredictions)
 }
 
+#' This function is for an older version of MethylPipeR and is now deprecated.
+#' It is currently still included to allow old scripts to run correctly.
 #' Retrieve non-zero coefficients from a glmnet model
 #'
 #' @param model A glmnet model object.
@@ -220,6 +239,7 @@ predictCoxModel <- function(model, xs, pipelineRunInformation, modelLabel) {
 #' @return A data.frame containing the non-zero model coefficients.
 #' @export
 getNonZeroCoefficients <- function(model, pipelineRunInformation, modelLabel) {
+  .Deprecated()
   tic('Calculate non-zero coefficients')
   modelCoefficients <- coef(model, s = 'lambda.min')
   nonZeroModelCoefficients <- as.data.frame(modelCoefficients[which(modelCoefficients[,1] != 0), ])
