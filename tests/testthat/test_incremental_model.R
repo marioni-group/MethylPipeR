@@ -1,4 +1,6 @@
-initLogs(sessionLogFolder = "C:/Users/s2092119/Documents/PhD/Omics Prediction of Incident Disease/R Package/MethylPipeR-UI_logs/")
+tmpSessionLogFolder <- paste0(tempdir(), "/")
+initLogs(sessionLogFolder = tmpSessionLogFolder, note = "Test note.")
+
 # Test incremental models
 dummyTrainXs <- matrix(rnorm(1000), ncol = 10)
 dummyTrainY <- rbinom(100, 1, 0.2)

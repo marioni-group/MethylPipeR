@@ -1,4 +1,7 @@
-initLogs(sessionLogFolder = "C:/Users/s2092119/Documents/PhD/Omics Prediction of Incident Disease/R Package/MethylPipeR-UI_logs/")
+tmpSessionLogFolder <- paste0(tempdir(), "/")
+
+initLogs(sessionLogFolder = tmpSessionLogFolder, note = "Test note.")
+
 sessionLogContents <- readLines(file(getOption("mprSessionLogFilepath")))[[1]]
 # This test needs fixing to correctly form the expected line(s).
 # expect_equal(sessionLogContents, paste0("Starting MethylPipeR session. Timestamp: ", getOption("mprSessionStartTimestamp")))
