@@ -10,8 +10,7 @@ rfTrainAndTest <- function(trainXs,
                            ntree,
                            mtry,
                            nodesize) {
-  # browser()
-  model <- randomForest(x = trainXs,
+  model <- randomForest::randomForest(x = trainXs,
                         y = trainY,
                         ntree = ntree,
                         mtry = mtry,
@@ -152,7 +151,7 @@ rfCVGridSearch <- function(xs,
   #                            mtry = mtryBest,
   #                            nodesize = nodesizeBest)
 
-  model <- randomForest(x = xs,
+  model <- randomForest::randomForest(x = xs,
                         y = y,
                         ntree = ntreeBest,
                         mtry = mtryBest,

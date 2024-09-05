@@ -14,6 +14,9 @@ should be saved to. Must end in "/".}
 \item{note}{A note which will be saved at the top of the session log - can
 help to identify a specific pipeline run when checking the pipeline logs.}
 }
+\value{
+
+}
 \description{
 To be called at the beginning of a MethylPipeR session. Initialises logging
 and model saving functionality.

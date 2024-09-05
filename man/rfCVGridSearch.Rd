@@ -9,6 +9,9 @@ rfCVGridSearch(xs, y, nFolds, foldIDs = NULL, metric = NULL, seed = NULL, ...)
 \arguments{
 \item{...}{}
 }
+\value{
+
+}
 \description{
 Title
 }

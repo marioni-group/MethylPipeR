@@ -9,6 +9,9 @@ logSessionLines(...)
 \arguments{
 \item{...}{The strings to be written to the session log. One string per line.}
 }
+\value{
+
+}
 \description{
 Writes lines to the session log.
 }

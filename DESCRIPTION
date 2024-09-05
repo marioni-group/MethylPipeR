@@ -1,9 +1,8 @@
 Package: MethylPipeR
 Type: Package
 Title: MethylPipeR
-Version: 0.1.0
+Version: 0.1.1
 Imports:
-  BART,
   pROC,
   glmnet,
   doParallel,
@@ -16,14 +15,9 @@ Imports:
   RColorBrewer,
   stats,
   MLmetrics,
-  randomForest,
-  randomForestSRC,
   e1071,
   performance,
   see,
-  biglasso,
-  bigmemory,
-  bigmemoryExt,
   methods
 Authors@R: c(
     person("Yipeng", "Cheng", ,"yipeng.cheng@ed.ac.uk", role = c("aut", "cre")))
@@ -34,5 +28,11 @@ LazyData: true
 RoxygenNote: 7.2.1
 Suggests: 
     testthat (>= 3.0.0),
-    spelling
+    spelling,
+    bigmemory,
+    biglasso,
+    bigmemoryExt,
+    BART,
+    randomForest,
+    randomForestSRC
 Config/testthat/edition: 3

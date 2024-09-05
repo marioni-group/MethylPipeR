@@ -1,4 +1,13 @@
 
+checkBARTAvailable <- function(functionName) {
+  if (!requireNamespace("BART", quietly = TRUE)) {
+    stop(
+      paste0('Package "BART" is required for the function ', functionName, '.'),
+      call. = FALSE
+    )
+  }
+}
+
 #' fitBARTSurvival
 #'
 #' @param trainXs A matrix/data.frame of X variables to be used in the model
@@ -33,8 +42,9 @@ fitBARTSurvival <- function(trainXs,
                             k = 2,
                             nSkip = 500,
                             type = "pbart") {
+  checkBARTAvailable("fitBARTSurvival")
   tic("Fit BART survival model.")
-  model <- mc.surv.bart(
+  model <- BART::mc.surv.bart(
     x.train = trainXs,
     times = trainTarget[, "time_to_event"],
     delta = trainTarget[, "Event"],
@@ -79,6 +89,7 @@ cvBARTNYearOnset <- function(xs,
                              sparse = FALSE,
                              mcCores = 10,
                              kList = c(2)) {
+  checkBARTAvailable("cvBARTNYearOnset")
   cvTrainAndValidate <- function(nTree, k, validationFoldID) {
     validationIndex <- foldID == validationFoldID
     trainIndex <- !validationIndex

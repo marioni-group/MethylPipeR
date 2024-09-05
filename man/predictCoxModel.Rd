@@ -14,6 +14,9 @@ predictCoxModel(model, xs, pipelineRunInformation, modelLabel)
 \item{xs}{A matrix/data.frame corresponding to X (variables). Columns should
 correspond to features.}
 
+\item{pipelineRunInformation}{The object originally created by
+\code{\link{beginPipelineRun}}.}
+
 \item{modelLabel}{A string that will act as a label for this function call.
 The label will be used as a prefix for the saved object file names in this
 function call.}

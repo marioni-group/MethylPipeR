@@ -12,6 +12,9 @@ saveMPRModelObject(model, suffix = NULL)
 \item{suffix}{Optional - a custom suffix to include in the file name after
 the timestamp.}
 }
+\value{
+
+}
 \description{
 Saves a MPRModel object to the logging folder.
 }

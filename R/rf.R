@@ -52,7 +52,7 @@ trainAndTestRF <- function(trainXs,
   }
 
   set.seed(pipelineRunInformation[["random seed"]])
-  model <- randomForest(trainXs,
+  model <- randomForest::randomForest(trainXs,
                         y = trainY,
                         xtest = testXs,
                         ytest = testY,

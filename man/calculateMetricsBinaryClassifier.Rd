@@ -33,6 +33,6 @@ Object containing model metrics.
 \description{
 This function is for an older version of MethylPipeR and is now deprecated.
 It is currently still included to allow old scripts to run correctly.
-Given model predictions and labels, calculates binary classification
+Given model predictions and labels, calculates binary classification 
 performance metrics
 }

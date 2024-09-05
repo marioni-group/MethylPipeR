@@ -71,6 +71,10 @@ fitMPRModel <- function(type, # 'binary', 'survival', or 'continuous'
     }
   }
 
+  checkMethod(method)
+  checkType(type)
+  checkMethodPackageInstalled(method = method, type = type)
+  
   # If using a survival model, check that the specified column names exist
   if (type == "survival") {
     if (!(tteColname %in% colnames(trainY))) {
@@ -144,9 +148,12 @@ fitMPRModel <- function(type, # 'binary', 'survival', or 'continuous'
 #' @param foldID A vector of integers with length equal to the number of rows in
 #'   \code{trainXs}. Each element represents the fold number assigned to the
 #'   corresponding row.
-#' @param ... The remaining parameters to be passed to the cross-validation function.
+#' @param ... The remaining parameters to be passed to the cross-validation 
+#' function.
 #'
-#' @return
+#' @return Fits the specified model, selecting the best performing set of
+#' hyperparameters from a k-fold cross-validation using each combination of
+#' hyperparameters in a grid search.
 #' @export
 fitMPRModelCV <- function(type, # 'binary', 'survival', or 'continuous'
                           method, # 'glmnet', 'bart', or 'rf'
@@ -176,6 +183,12 @@ fitMPRModelCV <- function(type, # 'binary', 'survival', or 'continuous'
     checkNA(testY)
   }
 
+  checkMethod(method)
+  checkType(type)
+  
+  # Check relevant package is installed for chosen model method
+  checkMethodPackageInstalled(method = method, type = type)
+  
   # If using a survival model, check that the specified column names exist
   if (type == "survival") {
     if (!(tteColname %in% colnames(trainY))) {
@@ -208,9 +221,9 @@ fitMPRModelCV <- function(type, # 'binary', 'survival', or 'continuous'
       "biglasso" = function() {
         nCols <- ncol(trainXs)
 
-        trainXsBig <- cbindBM(as.big.matrix(trainXs[, 1:(nCols / 2)]),
-                              as.big.matrix(trainXs[, (nCols / 2 + 1):nCols]))
-        cv.biglasso(trainXsBig,
+        trainXsBig <- bigmemoryExt::cbindBM(bigmemory::as.big.matrix(trainXs[, 1:(nCols / 2)]),
+                              bigmemory::as.big.matrix(trainXs[, (nCols / 2 + 1):nCols]))
+        biglasso::cv.biglasso(trainXsBig,
                     trainY,
                     family = "binomial",
                     nfolds = nFolds,
@@ -222,19 +235,19 @@ fitMPRModelCV <- function(type, # 'binary', 'survival', or 'continuous'
           testXs <- trainXs
         }
         if (parallel) {
-          mc.gbart(x.train = trainXs,
-                   y.train = trainY,
-                   x.test = testXs,
-                   type = "pbart",
-                   seed = seed,
-                   ...)
+          BART::mc.gbart(x.train = trainXs,
+                         y.train = trainY,
+                         x.test = testXs,
+                         type = "pbart",
+                         seed = seed,
+                         ...)
         } else {
-          gbart(x.train = trainXs,
-                y.train = trainY,
-                x.test = testXs,
-                type = "pbart",
-                seed = seed,
-                ...)
+          BART::gbart(x.train = trainXs,
+                      y.train = trainY,
+                      x.test = testXs,
+                      type = "pbart",
+                      seed = seed,
+                      ...)
         }
       },
       "rf" = function() {
@@ -265,9 +278,9 @@ fitMPRModelCV <- function(type, # 'binary', 'survival', or 'continuous'
         trainY <- trainY[, c(tteColname, eventColname)]
         colnames(trainY) <- c("time", "status")
 
-        trainXsBig <- cbindBM(as.big.matrix(trainXs[, 1:(nCols / 2)]),
-                              as.big.matrix(trainXs[, (nCols / 2 + 1):nCols]))
-        cv.biglasso(trainXsBig,
+        trainXsBig <- bigmemoryExt::cbindBM(bigmemory::as.big.matrix(trainXs[, 1:(nCols / 2)]),
+                              bigmemory::as.big.matrix(trainXs[, (nCols / 2 + 1):nCols]))
+        biglasso::cv.biglasso(trainXsBig,
                     trainY,
                     family = "cox",
                     nfolds = nFolds,
@@ -275,12 +288,12 @@ fitMPRModelCV <- function(type, # 'binary', 'survival', or 'continuous'
                     ...)
       },
       "bart" = function() {
-        mc.surv.bart(x.train = trainXs, y.train = trainY)
+        BART::mc.surv.bart(x.train = trainXs, y.train = trainY)
       },
       "rf" = function() {
         # TODO: replace with CV version
         trainDF <- cbind(trainXs, trainY)
-        rfsrc(as.formula(paste0("Surv(",
+        randomForestSRC::rfsrc(as.formula(paste0("Surv(",
                                 tteColname,
                                 ", ",
                                 eventColname,
@@ -301,9 +314,9 @@ fitMPRModelCV <- function(type, # 'binary', 'survival', or 'continuous'
       "biglasso" = function() {
         nCols <- ncol(trainXs)
 
-        trainXsBig <- cbindBM(as.big.matrix(trainXs[, 1:(nCols / 2)]),
-                              as.big.matrix(trainXs[, (nCols / 2 + 1):nCols]))
-        cv.biglasso(trainXsBig,
+        trainXsBig <- bigmemoryExt::cbindBM(bigmemory::as.big.matrix(trainXs[, 1:(nCols / 2)]),
+                              bigmemory::as.big.matrix(trainXs[, (nCols / 2 + 1):nCols]))
+        biglasso::cv.biglasso(trainXsBig,
                     trainY,
                     family = "gaussian",
                     nfolds = nFolds,

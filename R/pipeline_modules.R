@@ -324,7 +324,7 @@ fitCoxModel <- function(xs,
 #' @param xs A matrix/data.frame corresponding to X (variables). Columns should
 #'   correspond to features.
 #' @param pipelineRunInformation The object originally created by
-#'   \code\{link{beginPipelineRun}}.
+#'   \code{\link{beginPipelineRun}}.
 #' @param modelLabel A string that will act as a label for this function call.
 #'   The label will be used as a prefix for the saved object file names in this
 #'   function call.

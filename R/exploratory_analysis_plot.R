@@ -3,14 +3,15 @@ formatPlot <- function(plotToFormat, title, xLabel, yLabel) {
   plotToFormat + ggtitle(title) + xlab(xLabel) + ylab(yLabel)
 }
 
-#' plotSingleVariableDensity
+#' plotSingleVariableDensity This old-format function is deprecated and will be
+#' removed in a future version of MethylPipeR.
 #'
-#' @param plotData
-#' @param plotVariable
-#' @param title
-#' @param xLabel
-#' @param yLabel
-#' @param pipelineRunInformation
+#' @param plotData A dataframe containing the variable to be plotted
+#' @param plotVariable A string specifying the variable to be plotted
+#' @param title A string specifying the title for the plot
+#' @param xLabel A string specifying the x-axis label
+#' @param yLabel A string specifying the y-axis label
+#' @param pipelineRunInformation a pipelineRunInformation object
 #'
 #' @return ggplot object
 #' @export
@@ -20,6 +21,7 @@ plotSingleVariableDensity <- function(plotData,
                                       xLabel,
                                       yLabel,
                                       pipelineRunInformation) {
+  .Deprecated()
   tic(paste0("Created plot for ", plotVariable))
   p <- ggplot(plotData, aes(x = !!sym(plotVariable))) +
     geom_density(colour = "black", fill = "white")

@@ -1,6 +1,13 @@
-checkNA <- function(x, stop = TRUE) {
+#' Title
+#'
+#' @param x 
+#' @param stop_if_na
+#' @keywords internal
+#'
+#' @return NULL
+checkNA <- function(x, stop_if_na = TRUE) {
   containsNAs <- any(is.na(x))
-  if (containsNAs & stop) {
+  if (containsNAs & stop_if_na) {
     stop(paste0("Input object of class ",
                 class(x),
                 " contains NAs which are not handled by the function."))
@@ -9,9 +16,67 @@ checkNA <- function(x, stop = TRUE) {
   }
 }
 
+#' Title
+#'
+#' @param x 
+#' @keywords internal
+#'
+#' @return NULL
 checkMatrixOrDF <- function(x) {
-  if (!(is.matrix(x) | is.data.frame(x) | is.big.matrix(x))) {
+  if (!(is.matrix(x) | is.data.frame(x) | bigmemory::is.big.matrix(x))) {
     stop("Input should be a matrix or data.frame!\n")
+  }
+}
+
+#' Title
+#'
+#' @param method 
+#' @keywords internal
+#'
+#' @return NULL
+checkMethod <- function(method) {
+  if (!(method %in% c("glmnet", "rf", "bart", "biglasso"))) {
+    stop("method must be one of: glmnet, rf, bart, biglasso")
+  }
+}
+
+#' Title
+#'
+#' @param type 
+#' @keywords internal
+#'
+#' @return NULL
+checkType <- function(type) {
+  if (!(type %in% c("survival", "binary", "continuous"))) {
+    stop("type must be one of: survival, binary, continuous")
+  }
+}
+
+#' Title
+#'
+#' @param method 
+#' @param type 
+#' @keywords internal 
+#' @return NULL
+checkMethodPackageInstalled <- function(method, type) {
+  if (method == "bart") {
+    if (!requireNamespace("BART", quietly = TRUE)) {
+      stop("Package BART required for model method 'bart'")
+    }
+  } else if (method == "rf") {
+    if (type == "binary" | type == "continuous") {
+      if (!requireNamespace("randomForest", quietly = TRUE)) {
+        stop(paste0("Package randomForest required for model method 'rf' and type ", type))
+      }
+    } else if (type == "survival") {
+      if (!requireNamespace("randomForestSRC", quietly = TRUE)) {
+        stop(paste0("Package randomForestSRC required for model method 'rf' and type ", type))
+      }
+    }
+  } else if (method == "biglasso") {
+    if (!requireNamespace("biglasso", quietly = TRUE)) {
+      stop("Package biglasso required for model method 'biglasso'")
+    }
   }
 }
 

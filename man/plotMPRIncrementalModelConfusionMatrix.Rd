@@ -2,7 +2,10 @@
 % Please edit documentation in R/metrics_plotting.R
 \name{plotMPRIncrementalModelConfusionMatrix}
 \alias{plotMPRIncrementalModelConfusionMatrix}
-\title{Title}
+\title{Plots confusion matrix metrics (true/false positives/negatives) at a range of
+probability thresholds (from 0.1 to 1, inclusive, in steps of 0.1) given two 
+sets of predicted probabilities (from two different models) and a binary 
+target vector of ground truth class labels.}
 \usage{
 plotMPRIncrementalModelConfusionMatrix(
   nullModelResponse,
@@ -11,8 +14,20 @@ plotMPRIncrementalModelConfusionMatrix(
 )
 }
 \arguments{
-\item{target}{}
+\item{nullModelResponse}{A vector of predicted probabilities from the null 
+model}
+
+\item{fullModelResponse}{A vector of predicted probabilities from the full 
+model}
+
+\item{target}{A binary vector of ground truth class labels.}
+}
+\value{
+
 }
 \description{
-Title
+Plots confusion matrix metrics (true/false positives/negatives) at a range of
+probability thresholds (from 0.1 to 1, inclusive, in steps of 0.1) given two 
+sets of predicted probabilities (from two different models) and a binary 
+target vector of ground truth class labels.
 }

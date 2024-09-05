@@ -21,9 +21,9 @@ fitMPRModelBinarybiglasso <- function(trainXs,
                                       ...) {
   # To avoid 'LongVector not supported' error
   nCols <- ncol(trainXs)
-  trainXsBig <- cbindBM(as.big.matrix(trainXs[, 1:(nCols / 2)]),
-                        as.big.matrix(trainXs[, (nCols / 2 + 1):nCols]))
-  biglasso(trainXsBig, trainY, family = "binomial", ...)
+  trainXsBig <- bigmemoryExt::cbindBM(bigmemory::as.big.matrix(trainXs[, 1:(nCols / 2)]),
+                        bigmemory::as.big.matrix(trainXs[, (nCols / 2 + 1):nCols]))
+  biglasso::biglasso(trainXsBig, trainY, family = "binomial", ...)
 }
 
 fitMPRModelBinaryBART <- function(trainXs,
@@ -39,19 +39,19 @@ fitMPRModelBinaryBART <- function(trainXs,
     testXs <- trainXs
   }
   if (parallel) {
-    mc.gbart(x.train = trainXs,
-             y.train = trainY,
-             x.test = testXs,
-             type = "pbart",
-             seed = seed,
-             ...)
+    BART::mc.gbart(x.train = trainXs,
+                   y.train = trainY,
+                   x.test = testXs,
+                   type = "pbart",
+                   seed = seed,
+                   ...)
   } else {
-    gbart(x.train = trainXs,
-          y.train = trainY,
-          x.test = testXs,
-          type = "pbart",
-          seed = seed,
-          ...)
+    BART::gbart(x.train = trainXs,
+                y.train = trainY,
+                x.test = testXs,
+                type = "pbart",
+                seed = seed,
+                ...)
   }
 }
 
@@ -65,7 +65,7 @@ fitMPRModelBinaryRF <- function(trainXs,
                                 seed,
                                 ...) {
   set.seed(seed)
-  randomForest(x = trainXs, y = as.factor(trainY), ...)
+  randomForest::randomForest(x = trainXs, y = as.factor(trainY), ...)
 }
 
 fitMPRModelContinuousglmnet <- function(trainXs,
@@ -91,9 +91,9 @@ fitMPRModelContinuousbiglasso <- function(trainXs,
                                           ...) {
   # To avoid 'LongVector not supported' error
   nCols <- ncol(trainXs)
-  trainXsBig <- cbindBM(as.big.matrix(trainXs[, 1:(nCols / 2)]),
-                        as.big.matrix(trainXs[, (nCols / 2 + 1):nCols]))
-  biglasso(trainXsBig, trainY, family = "gaussian", ...)
+  trainXsBig <- bigmemoryExt::cbindBM(bigmemory::as.big.matrix(trainXs[, 1:(nCols / 2)]),
+                        bigmemory::as.big.matrix(trainXs[, (nCols / 2 + 1):nCols]))
+  biglasso::biglasso(trainXsBig, trainY, family = "gaussian", ...)
 }
 
 fitMPRModelContinuousBART <- function(trainXs,
@@ -109,19 +109,19 @@ fitMPRModelContinuousBART <- function(trainXs,
     testXs <- trainXs
   }
   if (parallel) {
-    mc.gbart(x.train = trainXs,
-             y.train = trainY,
-             x.test = testXs,
-             type = "wbart",
-             seed = seed, 
-            ...)
+    BART::mc.gbart(x.train = trainXs,
+                   y.train = trainY,
+                   x.test = testXs,
+                   type = "wbart",
+                   seed = seed, 
+                   ...)
   } else {
-    gbart(x.train = trainXs,
-          y.train = trainY,
-          x.test = testXs,
-          type = "wbart",
-          seed = seed,
-          ...)
+    BART::gbart(x.train = trainXs,
+                y.train = trainY,
+                x.test = testXs,
+                type = "wbart",
+                seed = seed,
+                ...)
   }
 }
 
@@ -135,7 +135,7 @@ fitMPRModelContinuousRF <- function(trainXs,
                                     seed,
                                     ...) {
   set.seed(seed)
-  randomForest(x = trainXs, y = trainY, ...)
+  randomForest::randomForest(x = trainXs, y = trainY, ...)
 }
 
 fitMPRModelSurvivalglmnet <- function(trainXs,
@@ -164,13 +164,13 @@ fitMPRModelSurvivalbiglasso <- function(trainXs,
                                         ...) {
   # To avoid 'LongVector not supported' error
   nCols <- ncol(trainXs)
-  trainXsBig <- cbindBM(as.big.matrix(trainXs[, 1:(nCols / 2)]),
-                        as.big.matrix(trainXs[, (nCols / 2 + 1):nCols]))
+  trainXsBig <- bigmemoryExt::cbindBM(bigmemory::as.big.matrix(trainXs[, 1:(nCols / 2)]),
+                        bigmemory::as.big.matrix(trainXs[, (nCols / 2 + 1):nCols]))
 
   # BigLasso requires the y matrix column names to be 'time' and 'status'
   trainY <- trainY[, c(tteColname, eventColname)]
   colnames(trainY) <- c("time", "status")
-  biglasso(trainXsBig, as.matrix(trainY), family = "cox", ...)
+  biglasso::biglasso(trainXsBig, as.matrix(trainY), family = "cox", ...)
 }
 
 fitMPRModelSurvivalBART <- function(trainXs,
@@ -182,7 +182,7 @@ fitMPRModelSurvivalBART <- function(trainXs,
                                     parallel,
                                     seed,
                                     ...) {
-  mc.surv.bart(x.train = trainXs, y.train = trainY, ...)
+  BART::mc.surv.bart(x.train = trainXs, y.train = trainY, ...)
 }
 
 fitMPRModelSurvivalRF <- function(trainXs,
@@ -195,7 +195,7 @@ fitMPRModelSurvivalRF <- function(trainXs,
                                   seed,
                                   ...) {
   trainDF <- cbind(trainXs, trainY)
-  rfsrc(as.formula(paste0("Surv(",
+  randomForestSRC::rfsrc(as.formula(paste0("Surv(",
                           tteColname,
                           ", ",
                           eventColname,

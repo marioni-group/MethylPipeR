@@ -7,7 +7,11 @@
 plotMPRIncrementalModelROC(incrementalModelResult)
 }
 \arguments{
-\item{incrementalModelResult}{}
+\item{incrementalModelResult}{A list object output from a call to 
+\code{fitMPRModelIncremental}}
+}
+\value{
+
 }
 \description{
 Title

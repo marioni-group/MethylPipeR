@@ -66,7 +66,13 @@ corresponding row.}
 \item{saveSuffix}{Optional - a custom suffix to include in the file name of
 the saved model object after the timestamp.}
 
-\item{...}{The remaining parameters to be passed to the cross-validation function.}
+\item{...}{The remaining parameters to be passed to the cross-validation 
+function.}
+}
+\value{
+Fits the specified model, selecting the best performing set of
+hyperparameters from a k-fold cross-validation using each combination of
+hyperparameters in a grid search.
 }
 \description{
 fitMPRModelCV

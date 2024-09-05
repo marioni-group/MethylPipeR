@@ -5,11 +5,16 @@ calculateMetricsAtThreshold <- function(predicted, actual, threshold) {
 }
 
 
-#' Title
+#' Plots confusion matrix metrics (true/false positives/negatives) at a range of
+#' probability thresholds (from 0.1 to 1, inclusive, in steps of 0.1) given two 
+#' sets of predicted probabilities (from two different models) and a binary 
+#' target vector of ground truth class labels.
 #'
-#' @param nullModelResponse
-#' @param fullModelResponse
-#' @param target
+#' @param nullModelResponse A vector of predicted probabilities from the null 
+#' model
+#' @param fullModelResponse A vector of predicted probabilities from the full 
+#' model
+#' @param target A binary vector of ground truth class labels.
 #'
 #' @return
 #' @export
@@ -100,7 +105,8 @@ plotMPRIncrementalModelConfusionMatrix <- function(nullModelResponse,
 
 #' Title
 #'
-#' @param incrementalModelResult
+#' @param incrementalModelResult A list object output from a call to 
+#' \code{fitMPRModelIncremental}
 #'
 #' @return
 #' @export
