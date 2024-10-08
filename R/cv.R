@@ -59,18 +59,7 @@ rfCVIteration <- function(dataset,
   meanMetricResult
 }
 
-#' Title
-#'
-#' @param xs
-#' @param y
-#' @param nFolds
-#' @param foldIDs
-#' @param metric
-#' @param seed
-#' @param ...
-#'
-#' @return
-#' @export
+
 rfCVGridSearch <- function(xs,
                            y,
                            nFolds,

@@ -221,8 +221,7 @@ fitMPRModelCV <- function(type, # 'binary', 'survival', or 'continuous'
       "biglasso" = function() {
         nCols <- ncol(trainXs)
 
-        trainXsBig <- bigmemoryExt::cbindBM(bigmemory::as.big.matrix(trainXs[, 1:(nCols / 2)]),
-                              bigmemory::as.big.matrix(trainXs[, (nCols / 2 + 1):nCols]))
+        trainXsBig <- bigmemory::as.big.matrix(trainXs)
         biglasso::cv.biglasso(trainXsBig,
                     trainY,
                     family = "binomial",
@@ -278,8 +277,7 @@ fitMPRModelCV <- function(type, # 'binary', 'survival', or 'continuous'
         trainY <- trainY[, c(tteColname, eventColname)]
         colnames(trainY) <- c("time", "status")
 
-        trainXsBig <- bigmemoryExt::cbindBM(bigmemory::as.big.matrix(trainXs[, 1:(nCols / 2)]),
-                              bigmemory::as.big.matrix(trainXs[, (nCols / 2 + 1):nCols]))
+        trainXsBig <- bigmemory::as.big.matrix(trainXs)
         biglasso::cv.biglasso(trainXsBig,
                     trainY,
                     family = "cox",
@@ -314,8 +312,7 @@ fitMPRModelCV <- function(type, # 'binary', 'survival', or 'continuous'
       "biglasso" = function() {
         nCols <- ncol(trainXs)
 
-        trainXsBig <- bigmemoryExt::cbindBM(bigmemory::as.big.matrix(trainXs[, 1:(nCols / 2)]),
-                              bigmemory::as.big.matrix(trainXs[, (nCols / 2 + 1):nCols]))
+        trainXsBig <- bigmemory::as.big.matrix(trainXs)
         biglasso::cv.biglasso(trainXsBig,
                     trainY,
                     family = "gaussian",

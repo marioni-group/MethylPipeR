@@ -21,8 +21,7 @@ fitMPRModelBinarybiglasso <- function(trainXs,
                                       ...) {
   # To avoid 'LongVector not supported' error
   nCols <- ncol(trainXs)
-  trainXsBig <- bigmemoryExt::cbindBM(bigmemory::as.big.matrix(trainXs[, 1:(nCols / 2)]),
-                        bigmemory::as.big.matrix(trainXs[, (nCols / 2 + 1):nCols]))
+  trainXsBig <- bigmemory::as.big.matrix(trainXs)
   biglasso::biglasso(trainXsBig, trainY, family = "binomial", ...)
 }
 
@@ -91,8 +90,7 @@ fitMPRModelContinuousbiglasso <- function(trainXs,
                                           ...) {
   # To avoid 'LongVector not supported' error
   nCols <- ncol(trainXs)
-  trainXsBig <- bigmemoryExt::cbindBM(bigmemory::as.big.matrix(trainXs[, 1:(nCols / 2)]),
-                        bigmemory::as.big.matrix(trainXs[, (nCols / 2 + 1):nCols]))
+  trainXsBig <- bigmemory::as.big.matrix(trainXs)
   biglasso::biglasso(trainXsBig, trainY, family = "gaussian", ...)
 }
 
@@ -164,8 +162,7 @@ fitMPRModelSurvivalbiglasso <- function(trainXs,
                                         ...) {
   # To avoid 'LongVector not supported' error
   nCols <- ncol(trainXs)
-  trainXsBig <- bigmemoryExt::cbindBM(bigmemory::as.big.matrix(trainXs[, 1:(nCols / 2)]),
-                        bigmemory::as.big.matrix(trainXs[, (nCols / 2 + 1):nCols]))
+  trainXsBig <- bigmemory::as.big.matrix(trainXs)
 
   # BigLasso requires the y matrix column names to be 'time' and 'status'
   trainY <- trainY[, c(tteColname, eventColname)]
